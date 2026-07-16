@@ -64,7 +64,7 @@ export function buildAmazonImageUrl(asin: string, size = 500): string {
 }
 
 export function buildAmazonImageFallbackUrl(asin: string, size = 500): string {
-  return `https://m.media-amazon.com/images/P/${asin}.01._SL${size}_.jpg`;
+  return `https://images-na.ssl-images-amazon.com/images/P/${asin}.01._SL${size}_.jpg`;
 }
 
 export function getAsinData(asin: string): AsinData | null {
