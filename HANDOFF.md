@@ -149,21 +149,49 @@ Hostinger field names: **Type, Name, Value, TTL** (table shows **Content**).
 
 **Step 1 — Grant Vercel access to your repo (GitHub side only — no tokens)**
 
+#### What "Configure" actually shows (verified Jul 16, 2026 — screenshot)
+
+Clicking **Configure** on Vercel at https://github.com/settings/installations **does** open the correct GitHub App page. Colin's screenshot is **not** Pinterest, Vercel docs, or a broken/wrong page.
+
+**What Colin sees (bottom of page):**
+
+- `vercel bot commented Apr 14, 2022`
+- A deployment table with old projects like `front/next-site/svelte-app` — status **Ready** / **Building**
+
+That is **historical Vercel bot activity** from an old 2022 project. It sits at the **bottom** of the Configure page. **Repository access is above this — scroll up.**
+
+**Common mistake:** clicking the **Vercel** name/link instead of the **Configure** button on the right. Use **Configure** only.
+
+#### Path A — scroll up on the same page (try first)
+
 1. Open: https://github.com/settings/installations  
-2. Find **Vercel** → click **Configure**  
-3. Under **Repository access**, choose **Only select repositories**  
-4. Check **`colindmurphy0409-hash/amazon-affilate-blog`**  
-5. Click **Save**
+2. Find **Vercel** → click **Configure** (the button, not the app name)  
+3. **Scroll to the top** of the page (Page Up or drag scrollbar up)  
+4. Find **Repository access** → choose **Only select repositories**  
+5. Check **`colindmurphy0409-hash/amazon-affilate-blog`**  
+6. Click **Save**
 
-If **Vercel** is not listed: click **Configure** on any app or use **Add** from https://github.com/apps/vercel — install for `colindmurphy0409-hash` and grant `amazon-affilate-blog`.
+#### Path B — repo-level installations (if Path A has no Repository access at top)
 
-Tell the next chat: *"Step 1 done"* — you'll get Step 2 only (check webhooks page).
+1. Open: https://github.com/colindmurphy0409-hash/amazon-affilate-blog/settings/installations  
+2. Find **Vercel** → **Configure**  
+3. Grant access to this repo → **Save**
 
-**Step 2 — Confirm Vercel webhook exists**
+#### Path C — confirm webhook after access is saved
 
 1. Open: https://github.com/colindmurphy0409-hash/amazon-affilate-blog/settings/hooks  
 2. You should see a **Vercel** webhook (URL contains `vercel.com`)  
-3. If **no webhook**: repeat Step 1 or reinstall the Vercel GitHub App from the installations page
+3. If **no webhook**: repeat Path A or B, or reinstall from https://github.com/apps/vercel
+
+If **Vercel** is not listed on the account installations page: install from https://github.com/apps/vercel for `colindmurphy0409-hash` and grant `amazon-affilate-blog`.
+
+Tell the next chat: *"Step 1 done"* — you'll get Step 2 only (webhooks check if not already done via Path C).
+
+**Step 2 — Confirm Vercel webhook exists** (may already be done in Step 1 Path C)
+
+1. Open: https://github.com/colindmurphy0409-hash/amazon-affilate-blog/settings/hooks  
+2. You should see a **Vercel** webhook (URL contains `vercel.com`)  
+3. If **no webhook**: repeat Step 1 Path A or B, or reinstall from https://github.com/apps/vercel
 
 Tell the next chat: *"Step 2 done — webhook yes/no"*.
 
@@ -183,6 +211,24 @@ Tell the next chat: *"Step 3 done"*.
 4. When it shows **Ready**, hard-refresh https://wellthlab.blog with **Ctrl + Shift + R**
 
 If Step 4 shows a new deployment → auto-deploy is fixed. Future pushes work with no tokens.
+
+### Trigger deploy without Vercel UI (after Step 1 saves repo access)
+
+No Vercel dashboard navigation needed once GitHub has granted repo access and the webhook exists.
+
+**Option 1 — empty commit (preferred, no tokens):**
+
+```bat
+cd C:\Users\mindb\.cursor\amazon-affiliate-blog
+git commit --allow-empty -m "Trigger Vercel deploy"
+git push origin main
+```
+
+Then wait 60s and reload https://vercel.com/murph1/amazon-affiliate-blog/deployments (Ctrl+R). A **new top row** should appear. Empty commit was tried **before** Step 1 was fixed — it failed because the webhook was missing. Retry only **after** Step 1 Save succeeds.
+
+**Option 2 — GitHub Actions (token fallback only):**
+
+Manual **Run workflow** on `.github/workflows/deploy-vercel.yml` — requires `VERCEL_TOKEN` secret (see below). Use only if Option 1 still fails after Steps 1–3.
 
 ### If Steps 1–4 fail (token fallback only)
 
