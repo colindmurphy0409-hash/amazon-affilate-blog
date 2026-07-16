@@ -60,6 +60,10 @@ export function buildAmazonUrl(asin: string, tag?: string): string {
 }
 
 export function buildAmazonImageUrl(asin: string, size = 500): string {
+  return `/images/products/${asin}.jpg`;
+}
+
+export function buildAmazonImageFallbackUrl(asin: string, size = 500): string {
   return `https://m.media-amazon.com/images/P/${asin}.01._SL${size}_.jpg`;
 }
 

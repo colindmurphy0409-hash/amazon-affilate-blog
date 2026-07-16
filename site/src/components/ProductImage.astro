@@ -1,5 +1,5 @@
 ---
-import { buildAmazonImageUrl } from '@/lib/affiliate';
+import { buildAmazonImageUrl, buildAmazonImageFallbackUrl } from '@/lib/affiliate';
 
 interface Props {
   asin: string;
@@ -9,6 +9,7 @@ interface Props {
 
 const { asin, title, size = 'card' } = Astro.props;
 const src = buildAmazonImageUrl(asin);
+const fallback = buildAmazonImageFallbackUrl(asin);
 
 const sizeClasses = {
   hero: 'mx-auto w-full max-w-md rounded-2xl bg-white p-6 shadow-card ring-1 ring-slate-200/80',
@@ -32,5 +33,6 @@ const imgClasses = {
     loading="lazy"
     decoding="async"
     class={imgClasses[size]}
+    onerror={`this.onerror=null;this.src='${fallback}';`}
   />
 </div>
