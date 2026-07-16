@@ -1,13 +1,14 @@
 name: Deploy to Vercel
 
-# Disabled on push — prefer normal git → Vercel auto-deploy (see HANDOFF.md).
-# Manual fallback only if GitHub↔Vercel reconnect fails. Requires VERCEL_TOKEN secret.
+# GitHub↔Vercel webhook is broken — this workflow is the production deploy path.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 concurrency:
   group: vercel-production
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -27,15 +28,29 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+          test -f dist/tymo-curlpro-review/index.html
+          test -f dist/index.html
+          grep -q "tymo-curlpro-review" dist/index.html
 
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
-      - name: Link and deploy to Vercel
+      - name: Link, build on Vercel, deploy prebuilt to production
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
+          set -euo pipefail
           vercel link --yes --project=amazon-affiliate-blog --scope=murph1 --token="$VERCEL_TOKEN"
-          vercel deploy --prod --token="$VERCEL_TOKEN"
+          vercel pull --yes --environment=production --token="$VERCEL_TOKEN" --scope=murph1
+          vercel build --prod --token="$VERCEL_TOKEN" --scope=murph1
+          DEPLOY_URL="$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --scope=murph1)"
+          echo "Deployed to: $DEPLOY_URL"
+          curl -fsSL "$DEPLOY_URL/tymo-curlpro-review/" | grep -qi "TYMO"
+          vercel alias set "$DEPLOY_URL" wellthlab.blog --token="$VERCEL_TOKEN" --scope=murph1 --yes
+          vercel alias set "$DEPLOY_URL" amazon-affiliate-blog.vercel.app --token="$VERCEL_TOKEN" --scope=murph1 --yes
+          sleep 5
+          curl -fsSL "https://wellthlab.blog/tymo-curlpro-review/" | grep -qi "TYMO"
