@@ -1,0 +1,42 @@
+---
+import ProductImage from './ProductImage.astro';
+import StarRating from './StarRating.astro';
+import AmazonCTA from './AmazonCTA.astro';
+import type { AsinData } from '@/lib/affiliate';
+
+interface Props {
+  asin: AsinData;
+  label?: string;
+  highlighted?: boolean;
+}
+
+const { asin, label, highlighted = false } = Astro.props;
+const shortName = asin.title.split(',')[0].split(' ').slice(0, 3).join(' ');
+---
+
+<div
+  class:list={[
+    'flex h-full flex-col rounded-2xl border bg-white p-6 shadow-card',
+    highlighted ? 'border-brand-300 ring-2 ring-brand-100' : 'border-slate-200',
+  ]}
+>
+  {label && (
+    <p class="mb-4 text-xs font-bold uppercase tracking-wider text-brand-700">{label}</p>
+  )}
+  <div class="mx-auto w-full max-w-xs">
+    <ProductImage asin={asin.asin} title={asin.title} size="hero" />
+  </div>
+  <h3 class="mt-5 font-display text-xl font-semibold leading-snug text-ink">{asin.title}</h3>
+  <div class="mt-3">
+    <StarRating rating={asin.rating} reviewCount={asin.review_count} />
+  </div>
+  {asin.price_band && (
+    <p class="mt-3 text-sm font-medium text-ink">Typical price: {asin.price_band}</p>
+  )}
+  {asin.best_for && (
+    <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">{asin.best_for}</p>
+  )}
+  <div class="mt-6">
+    <AmazonCTA asin={asin.asin} text={`View ${shortName} on Amazon`} fullWidth />
+  </div>
+</div>

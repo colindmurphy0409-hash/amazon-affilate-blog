@@ -12,71 +12,37 @@ interface Props {
 const { asins, highlightAsin } = Astro.props;
 ---
 
-<div class="my-10 space-y-4">
-  <h2 class="font-display text-2xl font-semibold text-ink">Compared at a glance</h2>
+<div class="not-prose my-10 space-y-4">
+  <h2 class="font-display text-2xl font-semibold text-ink">Quick comparison</h2>
 
-  <div class="hidden overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card md:block">
-    <table class="w-full">
-      <thead>
-        <tr class="border-b border-slate-100 bg-surface-muted text-left text-xs font-semibold uppercase tracking-wider text-ink-muted">
-          <th class="p-4">Product</th>
-          <th class="p-4">Rating</th>
-          <th class="p-4">Price</th>
-          <th class="p-4">Best for</th>
-          <th class="p-4"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {asins.map((asin) => (
-          <tr class:list={['border-b border-slate-100 last:border-0', highlightAsin === asin.asin && 'bg-brand-50/50']}>
-            <td class="p-4">
-              <div class="flex items-center gap-4">
-                <ProductImage asin={asin.asin} title={asin.title} size="thumb" />
-                <div>
-                  <p class="font-semibold text-ink">{asin.title}</p>
-                  {highlightAsin === asin.asin && (
-                    <span class="mt-1 inline-block rounded-full bg-brand-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                      Top pick
-                    </span>
-                  )}
-                </div>
-              </div>
-            </td>
-            <td class="p-4">
-              <StarRating rating={asin.rating} />
-            </td>
-            <td class="p-4 text-sm text-ink-muted">{asin.price_band ?? '—'}</td>
-            <td class="p-4 text-sm text-ink-muted">{asin.best_for ?? '—'}</td>
-            <td class="p-4">
-              <AmazonCTA asin={asin.asin} text="View on Amazon" variant="secondary" />
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-
-  <div class="grid gap-4 md:hidden">
+  <div class="space-y-4">
     {asins.map((asin) => (
-      <div class:list={['rounded-2xl border bg-white p-5 shadow-card', highlightAsin === asin.asin ? 'border-brand-300 ring-2 ring-brand-100' : 'border-slate-200']}>
-        <div class="flex gap-4">
-          <ProductImage asin={asin.asin} title={asin.title} size="card" />
+      <div
+        class:list={[
+          'rounded-2xl border bg-white p-5 shadow-card',
+          highlightAsin === asin.asin ? 'border-brand-300 ring-2 ring-brand-100' : 'border-slate-200',
+        ]}
+      >
+        <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
+          <div class="mx-auto w-full max-w-[180px] shrink-0 sm:mx-0">
+            <ProductImage asin={asin.asin} title={asin.title} size="card" />
+          </div>
           <div class="min-w-0 flex-1">
             {highlightAsin === asin.asin && (
-              <span class="mb-2 inline-block rounded-full bg-brand-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+              <span class="mb-2 inline-block rounded-full bg-brand-600 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
                 Top pick
               </span>
             )}
-            <p class="font-semibold text-ink">{asin.title}</p>
+            <h3 class="font-display text-lg font-semibold leading-snug text-ink">{asin.title}</h3>
             <div class="mt-2">
-              <StarRating rating={asin.rating} />
+              <StarRating rating={asin.rating} reviewCount={asin.review_count} />
             </div>
-            <p class="mt-2 text-sm text-ink-muted">{asin.best_for}</p>
+            <p class="mt-3 text-sm leading-relaxed text-ink-muted">{asin.best_for}</p>
             <p class="mt-1 text-sm font-medium text-ink">{asin.price_band}</p>
           </div>
-        </div>
-        <div class="mt-4">
-          <AmazonCTA asin={asin.asin} text="View on Amazon" variant="secondary" fullWidth />
+          <div class="shrink-0 sm:w-44">
+            <AmazonCTA asin={asin.asin} text="View on Amazon" variant="secondary" fullWidth />
+          </div>
         </div>
       </div>
     ))}
