@@ -16,14 +16,14 @@ Paste into a new chat: **"Read HANDOFF.md and continue from here."**
 | **Amazon tag** | `wellthlab-20` |
 | **Code on PC** | `C:\Users\mindb\.cursor\amazon-affiliate-blog` |
 
-## Name mismatch (important)
+## Name mismatch (cosmetic only — NOT the deploy bug)
 
 | Layer | Spelling | Notes |
 |-------|----------|-------|
-| GitHub repo | `amazon-affilate-blog` | one **f** |
-| Vercel project | `amazon-affiliate-blog` | two **f**'s |
+| GitHub repo | `amazon-affilate-blog` | missing **i** (affil**a**te) |
+| Vercel project | `amazon-affiliate-blog` | full word (affil**i**ate) |
 
-Same English Wellth Lab site. Different spellings on GitHub vs Vercel. **Vercel auto-deploy from GitHub push does not work reliably** because of this wiring. Use **GitHub Actions** (see Deploy section below).
+Different spellings are fine. Vercel links to a **repo**, not a matching project name. **Auto-deploy is broken because the GitHub ↔ Vercel webhook/link is disconnected**, not because of the spelling.
 
 ## DELETE / IGNORE (past mess)
 
@@ -79,8 +79,37 @@ Same English Wellth Lab site. Different spellings on GitHub vs Vercel. **Vercel 
 - **Direct URL:** https://vercel.com/murph1/amazon-affiliate-blog/deployments
 - Top row filters: All Branches, All Authors, All Environments, Select Date Range, Status
 - **NO "Create Deployment" button** anywhere on this page
-- Each row has **⋯** menu on the far right
+- Each row has **⋯** menu on the far right (typical options: Visit, View Build Logs, Redeploy, Promote to Production on previews — **Redeploy only rebuilds the same old commit; it does not pull new code from GitHub**)
 - Reload page: **Ctrl + R** (F5 may change screen brightness on Colin's keyboard)
+
+### Integrations — verified empty, NOT for GitHub (Jul 16, 2026)
+
+**NEVER send Colin to Integrations to fix deploy or reconnect Git.**
+
+- **Direct URL:** https://vercel.com/murph1/amazon-affiliate-blog/integrations
+- **Screenshot confirmed:** **"No Integrations Installed"** — Browse Marketplace only (Sanity, Supabase, etc.).
+- **NOT** the GitHub repo link screen. **NOT** where Vercel connects push → deploy.
+
+### Connect (Beta) — next UI path to try (Jul 16, 2026)
+
+- **Direct URL:** https://vercel.com/murph1/amazon-affiliate-blog/connect
+- **Left sidebar:** **Connect (Beta)** — visible in same screenshot as empty Integrations page.
+- **What it is ([Vercel Connect docs](https://vercel.com/docs/connect)):** Public Beta for **runtime credentials** and **webhook trigger forwarding** to your app. Mints short-lived scoped tokens (GitHub, Slack, Linear, etc.) so code/agents call external APIs without long-lived secrets in env vars.
+- **What it is NOT:** The classic **Vercel for GitHub** integration that runs `git push` → build → deploy. That uses the **Vercel GitHub App** (Step 1 below) and account auth (Step 3) — not Integrations, and probably not Connect either.
+
+**If Connect is tried as a possible Git path — expected UI flow:**
+
+1. Open **Connect (Beta)** in project left sidebar (URL above).
+2. Click **Create Connector** → choose **GitHub**.
+3. Authorize as **`colindmurphy0409-hash`** (not mindbodywallet).
+4. **Install** on **`colindmurphy0409-hash/amazon-affilate-blog`** (select repo scope).
+5. **Attach** connector to project `amazon-affiliate-blog`, environment **Production**.
+
+**Likely outcome:** Connect installs a **separate** Vercel-managed GitHub App for agents/API access and optional trigger forwarding to routes like `/api/webhooks/github`. It does **not** replace the deployment GitHub App or restore missing deploy webhooks. If there is no “link repository for deployments” option, stop — continue **Fix auto-deploy Steps 1–4** below.
+
+**Do not confuse:** Account GitHub login at https://vercel.com/account/settings/authentication (Step 3) vs **Connect** connectors (project sidebar, beta).
+
+**Where git deploy actually lives:** GitHub-side Vercel GitHub App (Step 1) + Vercel account GitHub auth (Step 3). No working **Settings → Git** in Colin's project UI.
 
 ### Settings — what exists vs what does NOT
 
@@ -100,6 +129,7 @@ Same English Wellth Lab site. Different spellings on GitHub vs Vercel. **Vercel 
 
 ### NEVER tell Colin to look for
 
+- **Integrations** (for Git reconnect — marketplace only; verified empty Jul 16 2026)
 - Settings → Domains
 - Settings → Git
 - Create Deployment button
@@ -121,28 +151,60 @@ Hostinger field names: **Type, Name, Value, TTL** (table shows **Content**).
 
 ---
 
-## Deploy (GitHub Actions — no Vercel menus)
+## Deploy (normal path — no tokens)
 
-**Problem:** Pushes to GitHub (`ddfb6e1`, `75bbf69`, etc.) did not trigger new Vercel deployments. Latest Vercel build stuck at `f5a1e2d` ("Affiliate-only cleanup") while site still showed old air fryer placeholders.
+**What should happen:** You push to GitHub → Vercel builds automatically. No tokens, no manual deploy.
 
-**Solution:** `.github/workflows/deploy-vercel.yml` deploys on every push to `main` using Vercel CLI + project name + team slug. **Only one secret required:** `VERCEL_TOKEN`.
+**What's actually wrong:** GitHub pushes (`ddfb6e1` through `0266649`) never triggered a new Vercel build. Production is stuck at `f5a1e2d` ("Affiliate-only cleanup"). `wellthlab.blog` still shows old air fryer guides. Empty-commit push was tried — still no new deployment row.
 
-### One-time setup (direct URLs only)
+**Root cause:** The Vercel GitHub App webhook/link to this repo is broken or missing. Not a repo-name typo.
 
-1. **Create Vercel token:** https://vercel.com/account/tokens  
-   - Name it `github-deploy`, copy the token.
+**Evidence project was connected once:** Deployments page shows past builds from GitHub commits. The link dropped — fix from **GitHub** (Vercel app permissions / webhook), not from Vercel Integrations or Connect (Beta).
 
-2. **Add GitHub secret:** https://github.com/colindmurphy0409-hash/amazon-affilate-blog/settings/secrets/actions  
-   - New secret → Name: `VERCEL_TOKEN` → paste token → Add secret.
+**Deployments ⋯ menu:** Redeploy only rebuilds the **same old commit** — does not pull new code from GitHub. Not a fix.
 
-3. **Re-run deploy:** https://github.com/colindmurphy0409-hash/amazon-affilate-blog/actions/workflows/deploy-vercel.yml  
-   - Click **Run workflow** → branch `main` → Run workflow.
+### Fix auto-deploy — one step at a time (do only the current step)
 
-After success, hard-refresh https://wellthlab.blog with **Ctrl + Shift + R**.
+**Step 1 — Grant Vercel access to your repo (GitHub side only — no tokens)**
 
-### Optional secrets (NOT required with current workflow)
+1. Open: https://github.com/settings/installations  
+2. Find **Vercel** → click **Configure**  
+3. Under **Repository access**, choose **Only select repositories**  
+4. Check **`colindmurphy0409-hash/amazon-affilate-blog`**  
+5. Click **Save**
 
-`VERCEL_ORG_ID` and `VERCEL_PROJECT_ID` were used in an older workflow version. Current workflow uses `vercel link --project=amazon-affiliate-blog --scope=murph1` instead. IDs can be fetched later with token via API if needed.
+If **Vercel** is not listed: click **Configure** on any app or use **Add** from https://github.com/apps/vercel — install for `colindmurphy0409-hash` and grant `amazon-affilate-blog`.
+
+Tell the next chat: *"Step 1 done"* — you'll get Step 2 only (check webhooks page).
+
+**Step 2 — Confirm Vercel webhook exists**
+
+1. Open: https://github.com/colindmurphy0409-hash/amazon-affilate-blog/settings/hooks  
+2. You should see a **Vercel** webhook (URL contains `vercel.com`)  
+3. If **no webhook**: repeat Step 1 or reinstall the Vercel GitHub App from the installations page
+
+Tell the next chat: *"Step 2 done — webhook yes/no"*.
+
+**Step 3 — Reconnect GitHub account on Vercel (account level, NOT project Git)**
+
+1. Open: https://vercel.com/account/settings/authentication  
+2. Under **GitHub**, click **Disconnect** (if shown)  
+3. Click **Connect** / **Reconnect** → authorize as **`colindmurphy0409-hash`** (not mindbodywallet)
+
+Tell the next chat: *"Step 3 done"*.
+
+**Step 4 — Watch for a new deployment**
+
+1. Open: https://vercel.com/murph1/amazon-affiliate-blog/deployments  
+2. Press **Ctrl + R** after 60 seconds  
+3. Look for a **new top row** (commit message like "Add six-product affiliate guides…" or newer)  
+4. When it shows **Ready**, hard-refresh https://wellthlab.blog with **Ctrl + Shift + R**
+
+If Step 4 shows a new deployment → auto-deploy is fixed. Future pushes work with no tokens.
+
+### If Steps 1–4 fail (token fallback only)
+
+Auto-deploy is still broken on Vercel's side — not normal. Fallback: `.github/workflows/deploy-vercel.yml` (manual **Run workflow** only) needs one secret `VERCEL_TOKEN` from https://vercel.com/account/tokens added at https://github.com/colindmurphy0409-hash/amazon-affilate-blog/settings/secrets/actions — use only if the no-token steps above fail.
 
 ---
 

@@ -1,8 +1,8 @@
 name: Deploy to Vercel
 
+# Disabled on push — prefer normal git → Vercel auto-deploy (see HANDOFF.md).
+# Manual fallback only if GitHub↔Vercel reconnect fails. Requires VERCEL_TOKEN secret.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
