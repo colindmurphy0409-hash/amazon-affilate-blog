@@ -6,7 +6,7 @@ primary_keyword: "best air fryer for small kitchen"
 asins:
   - B0C1H26V4V
   - B07VT7FVL4
-published: true
+published: false
 quick_pick_asin: B0C1H26V4V
 hero_cta_text: "Check price on Amazon"
 verdict: "The Cosori Lite is our top pick for tight spaces. If you need more capacity for family meals, step up to the Ninja AF101."

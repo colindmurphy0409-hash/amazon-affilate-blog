@@ -6,7 +6,7 @@ primary_keyword: "cosori lite vs ninja air fryer"
 asins:
   - B0C1H26V4V
   - B07VT7FVL4
-published: true
+published: false
 comparison_winner: B0C1H26V4V
 hero_cta_text: "Check price on Amazon"
 verdict: "Choose the Cosori Lite for the smallest footprint. Choose the Ninja AF101 when capacity matters more than saving inches."

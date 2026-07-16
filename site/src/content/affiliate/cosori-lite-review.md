@@ -5,7 +5,7 @@ type: review
 primary_keyword: "cosori lite air fryer review"
 asins:
   - B0C1H26V4V
-published: true
+published: false
 hero_cta_text: "See price on Amazon"
 verdict: "A strong pick for anyone with limited counter space who cooks for one or two. Skip it if you need family-size batches."
 updated: "July 15, 2026"

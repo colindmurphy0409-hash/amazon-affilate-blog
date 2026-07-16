@@ -100,12 +100,12 @@ const typeLabels = {
           <div class="mt-10 grid gap-6 md:grid-cols-2">
             <ProductCard
               asin={asinData[0]}
-              label={asinData[0].asin === winner?.asin ? 'Winner for small spaces' : 'Option A'}
+              label={asinData[0].asin === winner?.asin ? 'Our pick' : 'Option A'}
               highlighted={asinData[0].asin === winner?.asin}
             />
             <ProductCard
               asin={asinData[1]}
-              label={asinData[1].asin === winner?.asin ? 'Winner for small spaces' : 'Option B'}
+              label={asinData[1].asin === winner?.asin ? 'Our pick' : 'Option B'}
               highlighted={asinData[1].asin === winner?.asin}
             />
           </div>
