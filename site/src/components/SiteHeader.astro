@@ -1,0 +1,24 @@
+---
+import { getAffiliateConfig } from '@/lib/affiliate';
+
+const config = getAffiliateConfig();
+---
+
+<header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
+  <div class="container-page flex h-16 items-center justify-between">
+    <a href="/" class="flex items-center gap-3 group">
+      <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-900 text-sm font-bold text-white shadow-sm">
+        WL
+      </span>
+      <span>
+        <span class="block font-display text-lg font-semibold leading-tight text-ink group-hover:text-brand-700 transition-colors">
+          {config.site_name}
+        </span>
+        <span class="hidden sm:block text-xs text-ink-faint">{config.site_tagline}</span>
+      </span>
+    </a>
+    <nav class="flex items-center gap-4 text-sm font-medium text-ink-muted">
+      <a href="/" class="hover:text-brand-700 transition-colors">Guides</a>
+    </nav>
+  </div>
+</header>

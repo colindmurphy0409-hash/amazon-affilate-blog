@@ -1,0 +1,31 @@
+---
+import { getAffiliateConfig } from '@/lib/affiliate';
+
+const config = getAffiliateConfig();
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-20 border-t border-slate-200 bg-white">
+  <div class="container-page py-12">
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <div class="max-w-md">
+        <div class="flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-900 text-sm font-bold text-white">
+            WL
+          </span>
+          <span class="font-display text-xl font-semibold text-ink">{config.site_name}</span>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-ink-muted">
+          {config.site_tagline}. We research products carefully and only recommend picks we would stand behind.
+        </p>
+      </div>
+      <div class="max-w-sm text-sm leading-relaxed text-ink-muted">
+        <p class="font-semibold text-ink">Affiliate disclosure</p>
+        <p class="mt-2 whitespace-pre-line">{config.disclosure_full}</p>
+      </div>
+    </div>
+    <p class="mt-10 border-t border-slate-100 pt-6 text-xs text-ink-faint">
+      © {year} {config.site_name}. All rights reserved.
+    </p>
+  </div>
+</footer>

@@ -5,6 +5,8 @@ import { parse as parseYaml } from 'yaml';
 export interface AffiliateConfig {
   associate_tag: string;
   site_url: string;
+  site_name: string;
+  site_tagline: string;
   disclosure_short: string;
   disclosure_full: string;
 }
@@ -39,7 +41,13 @@ export function getAffiliateConfig(): AffiliateConfig {
 
   for (const configPath of paths) {
     const config = readYamlFile<AffiliateConfig>(configPath);
-    if (config) return config;
+    if (config) {
+      return {
+        site_name: 'Wellth Lab',
+        site_tagline: 'Research-backed product guides you can trust',
+        ...config,
+      };
+    }
   }
 
   throw new Error('Missing affiliate config (site/data/affiliate-config.yaml)');

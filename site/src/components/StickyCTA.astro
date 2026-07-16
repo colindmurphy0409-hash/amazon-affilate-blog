@@ -9,8 +9,6 @@ interface Props {
 const { asin, text = 'Check price on Amazon' } = Astro.props;
 ---
 
-<div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 shadow-lg md:hidden z-50">
-  <div class="max-w-3xl mx-auto flex justify-center">
-    <AmazonCTA asin={asin} text={text} />
-  </div>
+<div class="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white/95 p-4 shadow-lift backdrop-blur md:hidden">
+  <AmazonCTA asin={asin} text={text} fullWidth />
 </div>

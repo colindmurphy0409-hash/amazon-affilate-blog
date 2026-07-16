@@ -1,6 +1,8 @@
 associate_tag: "wellthlab-20"
 store_id: "wellthlab-20"
 site_url: "https://wellthlab.blog"
+site_name: "Wellth Lab"
+site_tagline: "Research-backed product guides you can trust"
 
 disclosure_short: "As an Amazon Associate I earn from qualifying purchases."
 disclosure_full: |

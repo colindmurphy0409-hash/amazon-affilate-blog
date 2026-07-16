@@ -2,11 +2,22 @@
 import '@/styles/global.css';
 import { getCollection } from 'astro:content';
 import ProductImage from '@/components/ProductImage.astro';
-import { getAsinData } from '@/lib/affiliate';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import StarRating from '@/components/StarRating.astro';
+import { getAffiliateConfig, getAsinData } from '@/lib/affiliate';
+
+const config = getAffiliateConfig();
 
 const pages = (await getCollection('affiliate'))
   .filter((p) => p.data.published)
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const typeLabels = {
+  review: 'Review',
+  roundup: 'Buying guide',
+  comparison: 'Comparison',
+} as const;
 ---
 
 <!DOCTYPE html>
@@ -17,56 +28,75 @@ const pages = (await getCollection('affiliate'))
     <meta http-equiv="content-language" content="en-US" />
     <meta name="google" content="notranslate" />
     <meta property="og:locale" content="en_US" />
-    <title>Affiliate Reviews — Honest Product Guides</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>{config.site_name} — Honest Product Guides</title>
     <meta name="description" content="Research-backed Amazon product reviews, roundups, and comparisons. Updated guides to help you buy with confidence." />
   </head>
-  <body class="bg-gray-50">
-    <header class="bg-white border-b border-gray-200">
-      <div class="max-w-3xl mx-auto px-4 py-6">
-        <h1 class="text-2xl font-bold text-gray-900">Affiliate Reviews</h1>
-        <p class="text-gray-600 mt-1">Honest product guides and comparisons</p>
-      </div>
-    </header>
+  <body>
+    <SiteHeader />
 
-    <main class="max-w-3xl mx-auto px-4 py-8">
-      <p class="text-gray-700 mb-8">
-        Research-backed reviews and buying guides. We earn a commission from
-        qualifying Amazon purchases at no extra cost to you.
-      </p>
+    <section class="relative overflow-hidden border-b border-slate-200 bg-white">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(20,184,166,0.12),transparent_45%),radial-gradient(circle_at_bottom_left,rgba(15,23,42,0.04),transparent_40%)]" />
+      <div class="container-page relative py-16 md:py-24">
+        <div class="max-w-3xl">
+          <p class="badge-type">Independent product research</p>
+          <h1 class="mt-5 font-display text-4xl font-semibold leading-tight text-ink md:text-5xl">
+            Buy smarter with guides you can actually trust
+          </h1>
+          <p class="mt-5 text-lg leading-relaxed text-ink-muted md:text-xl">
+            {config.site_name} publishes clear, research-backed reviews and buying guides —
+            no fluff, no filler, just products worth your money.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <main class="container-page py-12 md:py-16">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-ink md:text-3xl">Latest guides</h2>
+          <p class="mt-2 text-ink-muted">In-depth reviews, comparisons, and roundups updated for 2026.</p>
+        </div>
+      </div>
 
       {pages.length > 0 ? (
-        <ul class="space-y-4">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {pages.map((page) => {
             const slug = page.id.replace(/\.mdx?$/, '');
             const primaryAsin = page.data.asins[0] ? getAsinData(page.data.asins[0]) : null;
             return (
-            <li>
-              <a
-                href={`/${slug}`}
-                class="block bg-white border border-gray-200 rounded-lg p-4 hover:border-amazon transition-colors"
-              >
+              <a href={`/${slug}`} class="card-article group">
                 {primaryAsin && (
-                  <div class="mb-3">
+                  <div class="border-b border-slate-100 bg-surface-muted p-4">
                     <ProductImage asin={primaryAsin.asin} title={primaryAsin.title} size="card" />
                   </div>
                 )}
-                <span class="text-xs font-semibold uppercase tracking-wide text-amazon">
-                  {page.data.type}
-                </span>
-                <h2 class="text-lg font-bold mt-1">{page.data.title}</h2>
-                <p class="text-gray-600 text-sm mt-1">{page.data.description}</p>
+                <div class="p-5">
+                  <span class="badge-type">{typeLabels[page.data.type]}</span>
+                  <h3 class="mt-3 font-display text-xl font-semibold leading-snug text-ink group-hover:text-brand-700 transition-colors">
+                    {page.data.title}
+                  </h3>
+                  <p class="mt-3 text-sm leading-relaxed text-ink-muted line-clamp-3">
+                    {page.data.description}
+                  </p>
+                  {primaryAsin?.rating && (
+                    <div class="mt-4">
+                      <StarRating rating={primaryAsin.rating} reviewCount={primaryAsin.review_count} />
+                    </div>
+                  )}
+                  <p class="mt-4 text-sm font-semibold text-brand-700">Read guide →</p>
+                </div>
               </a>
-            </li>
             );
           })}
-        </ul>
+        </div>
       ) : (
-        <p class="text-gray-500">No published pages yet.</p>
+        <p class="text-ink-muted">No published pages yet.</p>
       )}
     </main>
 
-    <footer class="max-w-3xl mx-auto px-4 py-8 text-sm text-gray-500">
-      <p>As an Amazon Associate I earn from qualifying purchases.</p>
-    </footer>
+    <SiteFooter />
   </body>
 </html>

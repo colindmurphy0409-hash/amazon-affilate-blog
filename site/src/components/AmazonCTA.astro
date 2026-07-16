@@ -4,22 +4,31 @@ import { buildAmazonUrl } from '@/lib/affiliate';
 interface Props {
   asin: string;
   text?: string;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'dark';
+  fullWidth?: boolean;
 }
 
-const { asin, text = 'Check price on Amazon', variant = 'primary' } = Astro.props;
+const { asin, text = 'Check price on Amazon', variant = 'primary', fullWidth = false } = Astro.props;
 const url = buildAmazonUrl(asin);
 
-const classes = variant === 'primary'
-  ? 'inline-block bg-amazon hover:bg-amazon-dark text-white font-semibold px-6 py-3 rounded-lg transition-colors'
-  : 'inline-block border-2 border-amazon text-amazon hover:bg-amazon hover:text-white font-semibold px-6 py-3 rounded-lg transition-colors';
+const classes = {
+  primary:
+    'inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amazon to-amazon-dark px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-105 hover:shadow-md',
+  secondary:
+    'inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-ink transition hover:border-brand-500 hover:text-brand-700',
+  dark:
+    'inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800',
+};
 ---
 
 <a
   href={url}
   rel="nofollow sponsored"
   target="_blank"
-  class={classes}
+  class:list={[classes[variant], fullWidth && 'w-full']}
 >
-  {text} →
+  <span>{text}</span>
+  <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+  </svg>
 </a>

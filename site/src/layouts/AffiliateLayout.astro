@@ -7,7 +7,10 @@ import ProsCons from '@/components/ProsCons.astro';
 import ComparisonTable from '@/components/ComparisonTable.astro';
 import StickyCTA from '@/components/StickyCTA.astro';
 import ProductImage from '@/components/ProductImage.astro';
-import { getAffiliateConfig, getAsinDataList, type AsinData } from '@/lib/affiliate';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import StarRating from '@/components/StarRating.astro';
+import { getAffiliateConfig, getAsinDataList } from '@/lib/affiliate';
 
 interface Props {
   title: string;
@@ -41,11 +44,20 @@ const primaryAsin = asinData[0];
 const quickPick = asinData.find((a) => a.asin === quick_pick_asin) ?? asinData[0];
 const winner = asinData.find((a) => a.asin === comparison_winner) ?? asinData[0];
 const stickyAsin = quickPick?.asin ?? primaryAsin?.asin ?? asins[0];
+
+const typeLabels = {
+  review: 'Product review',
+  roundup: 'Buying guide',
+  comparison: 'Head-to-head comparison',
+} as const;
 ---
 
 <!DOCTYPE html>
 <html lang="en" translate="no">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <SEOHead
       title={title}
       description={description}
@@ -56,59 +68,87 @@ const stickyAsin = quickPick?.asin ?? primaryAsin?.asin ?? asins[0];
     />
   </head>
   <body>
-    <header class="bg-white border-b border-gray-200">
-      <div class="max-w-3xl mx-auto px-4 py-4">
-        <a href="/" class="text-sm text-gray-600 hover:text-gray-900">← Home</a>
-      </div>
-    </header>
+    <SiteHeader />
 
-    <main class="max-w-3xl mx-auto px-4 py-8 pb-24">
-      <DisclosureBanner />
+    <section class="border-b border-slate-200 bg-white">
+      <div class="container-page py-10 md:py-14">
+        <a href="/" class="inline-flex items-center gap-2 text-sm font-medium text-ink-muted transition hover:text-brand-700">
+          <span aria-hidden="true">←</span> Back to all guides
+        </a>
 
-      <article>
-        <header class="mb-8">
+        <div class="mt-6 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+          <div>
+            <span class="badge-type">{typeLabels[type]}</span>
+            <h1 class="mt-4 font-display text-3xl font-semibold leading-tight text-ink md:text-5xl">{title}</h1>
+            <p class="mt-5 text-lg leading-relaxed text-ink-muted">{description}</p>
+            {updated && (
+              <p class="mt-4 text-sm text-ink-faint">Last updated {updated}</p>
+            )}
+          </div>
+
           {type === 'review' && primaryAsin && (
-            <div class="mb-6">
+            <aside class="rounded-2xl border border-slate-200 bg-surface-muted p-6 shadow-card">
               <ProductImage asin={primaryAsin.asin} title={primaryAsin.title} size="hero" />
-            </div>
-          )}
-
-          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h1>
-          <p class="text-lg text-gray-600 mb-4">{description}</p>
-          {updated && (
-            <p class="text-sm text-gray-500">Last updated: {updated}</p>
+              <div class="mt-5 space-y-3">
+                <p class="font-semibold text-ink">{primaryAsin.title}</p>
+                <StarRating rating={primaryAsin.rating} reviewCount={primaryAsin.review_count} />
+                {primaryAsin.price_band && (
+                  <p class="text-sm text-ink-muted">Typical price: {primaryAsin.price_band}</p>
+                )}
+                {primaryAsin.best_for && (
+                  <p class="text-sm leading-relaxed text-ink-muted">{primaryAsin.best_for}</p>
+                )}
+                <AmazonCTA asin={primaryAsin.asin} text={hero_cta_text ?? 'Check price on Amazon'} fullWidth />
+              </div>
+            </aside>
           )}
 
           {type === 'roundup' && quickPick && (
-            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
-              <div class="flex flex-col sm:flex-row gap-4 items-start">
-                <ProductImage asin={quickPick.asin} title={quickPick.title} size="card" />
-                <div class="flex-1">
-              <p class="text-sm font-semibold text-amber-800 uppercase tracking-wide">Quick pick</p>
-              <p class="font-bold text-lg mt-1">{quickPick.title}</p>
-              {quickPick.best_for && <p class="text-gray-700 mt-1">{quickPick.best_for}</p>}
-              <div class="mt-3">
-                <AmazonCTA asin={quickPick.asin} text={hero_cta_text ?? 'Check price on Amazon'} />
+            <aside class="rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50 to-white p-6 shadow-card">
+              <p class="text-xs font-bold uppercase tracking-wider text-brand-700">Our top pick</p>
+              <div class="mt-4">
+                <ProductImage asin={quickPick.asin} title={quickPick.title} size="hero" />
               </div>
-                </div>
+              <p class="mt-5 font-display text-xl font-semibold text-ink">{quickPick.title}</p>
+              {quickPick.best_for && <p class="mt-2 text-sm text-ink-muted">{quickPick.best_for}</p>}
+              <div class="mt-4">
+                <StarRating rating={quickPick.rating} reviewCount={quickPick.review_count} />
               </div>
-            </div>
-          )}
-
-          {type === 'review' && primaryAsin && (
-            <div class="mt-4">
-              <AmazonCTA asin={primaryAsin.asin} text={hero_cta_text ?? 'Check price on Amazon'} />
-            </div>
+              <div class="mt-5">
+                <AmazonCTA asin={quickPick.asin} text={hero_cta_text ?? 'Check price on Amazon'} fullWidth />
+              </div>
+            </aside>
           )}
 
           {type === 'comparison' && asinData.length >= 2 && (
-            <div class="mt-4 flex flex-wrap gap-3">
-              <AmazonCTA asin={asinData[0].asin} text={`View ${asinData[0].title.split(' ')[0]} on Amazon`} />
-              <AmazonCTA asin={asinData[1].asin} text={`View ${asinData[1].title.split(' ')[0]} on Amazon`} variant="secondary" />
-            </div>
+            <aside class="space-y-4">
+              {asinData.slice(0, 2).map((asin, index) => (
+                <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
+                  <ProductImage asin={asin.asin} title={asin.title} size="card" />
+                  <p class="mt-4 font-semibold text-ink">{asin.title}</p>
+                  <div class="mt-2">
+                    <StarRating rating={asin.rating} />
+                  </div>
+                  <div class="mt-4">
+                    <AmazonCTA
+                      asin={asin.asin}
+                      text={`View ${asin.title.split(' ')[0]} on Amazon`}
+                      variant={index === 0 ? 'primary' : 'secondary'}
+                      fullWidth
+                    />
+                  </div>
+                </div>
+              ))}
+            </aside>
           )}
-        </header>
+        </div>
+      </div>
+    </section>
 
+    <main class="container-page py-10 pb-28 md:pb-16">
+      <DisclosureBanner />
+
+      <article class="mx-auto max-w-3xl">
         {(type === 'roundup' || type === 'comparison') && asinData.length > 0 && (
           <ComparisonTable
             asins={asinData}
@@ -116,19 +156,19 @@ const stickyAsin = quickPick?.asin ?? primaryAsin?.asin ?? asins[0];
           />
         )}
 
-        <div class="prose prose-gray max-w-none">
+        <div class="prose-article">
           <slot />
         </div>
 
         {type === 'review' && primaryAsin && <ProsCons asin={primaryAsin} />}
 
         {verdict && (
-          <div class="bg-gray-100 border border-gray-200 rounded-lg p-6 mt-8">
-            <h2 class="text-xl font-bold mb-2">Verdict</h2>
-            <p class="text-gray-700">{verdict}</p>
+          <div class="mt-12 rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-900 to-slate-800 p-8 text-white shadow-lift">
+            <h2 class="font-display text-2xl font-semibold text-white">Our verdict</h2>
+            <p class="mt-4 text-base leading-relaxed text-slate-200">{verdict}</p>
             {primaryAsin && (
-              <div class="mt-4">
-                <AmazonCTA asin={stickyAsin} text="See current price on Amazon" />
+              <div class="mt-6">
+                <AmazonCTA asin={stickyAsin} text="See current price on Amazon" variant="primary" />
               </div>
             )}
           </div>
@@ -136,12 +176,7 @@ const stickyAsin = quickPick?.asin ?? primaryAsin?.asin ?? asins[0];
       </article>
     </main>
 
-    <footer class="bg-white border-t border-gray-200 mt-12">
-      <div class="max-w-3xl mx-auto px-4 py-8 text-sm text-gray-600">
-        <p class="whitespace-pre-line">{config.disclosure_full}</p>
-        <p class="mt-4 text-gray-400">© {new Date().getFullYear()} Affiliate Reviews</p>
-      </div>
-    </footer>
+    <SiteFooter />
 
     {stickyAsin && <StickyCTA asin={stickyAsin} text={hero_cta_text} />}
   </body>
