@@ -45,20 +45,20 @@ Different spellings are fine. Vercel links to a **repo**, not a matching project
 
 ### Inside project `amazon-affiliate-blog`
 
-**Left sidebar (verified):**
+**Left sidebar (verified — screenshot Jul 16, 2026):**
 
 - Overview
 - Deployments
 - Logs
-- Analytics
-- Speed Insights
-- Observability
-- Firewall
-- Cron
 - Environment Variables
 - **Domains** ← add custom domains here
-- Connect (Beta)
+- Connect
 - Integrations
+- CDN
+- Firewall
+- Observability
+- Speed Insights
+- Analytics
 - Storage
 - **Settings**
 - Usage
@@ -82,32 +82,14 @@ Different spellings are fine. Vercel links to a **repo**, not a matching project
 - Each row has **⋯** menu on the far right (typical options: Visit, View Build Logs, Redeploy, Promote to Production on previews — **Redeploy only rebuilds the same old commit; it does not pull new code from GitHub**)
 - Reload page: **Ctrl + R** (F5 may change screen brightness on Colin's keyboard)
 
-### Integrations — verified empty, NOT for GitHub (Jul 16, 2026)
+### Integrations and Connect — NEVER for auto-deploy (verified Jul 16, 2026)
 
-**NEVER send Colin to Integrations to fix deploy or reconnect Git.**
+**NEVER send Colin to Integrations or Connect to fix deploy or reconnect Git.** Both are useless for GitHub auto-deploy.
 
-- **Direct URL:** https://vercel.com/murph1/amazon-affiliate-blog/integrations
-- **Screenshot confirmed:** **"No Integrations Installed"** — Browse Marketplace only (Sanity, Supabase, etc.).
-- **NOT** the GitHub repo link screen. **NOT** where Vercel connects push → deploy.
+**Deploy fix is GitHub-only:** https://github.com/settings/installations (Step 1 below).
 
-### Connect (Beta) — next UI path to try (Jul 16, 2026)
-
-- **Direct URL:** https://vercel.com/murph1/amazon-affiliate-blog/connect
-- **Left sidebar:** **Connect (Beta)** — visible in same screenshot as empty Integrations page.
-- **What it is ([Vercel Connect docs](https://vercel.com/docs/connect)):** Public Beta for **runtime credentials** and **webhook trigger forwarding** to your app. Mints short-lived scoped tokens (GitHub, Slack, Linear, etc.) so code/agents call external APIs without long-lived secrets in env vars.
-- **What it is NOT:** The classic **Vercel for GitHub** integration that runs `git push` → build → deploy. That uses the **Vercel GitHub App** (Step 1 below) and account auth (Step 3) — not Integrations, and probably not Connect either.
-
-**If Connect is tried as a possible Git path — expected UI flow:**
-
-1. Open **Connect (Beta)** in project left sidebar (URL above).
-2. Click **Create Connector** → choose **GitHub**.
-3. Authorize as **`colindmurphy0409-hash`** (not mindbodywallet).
-4. **Install** on **`colindmurphy0409-hash/amazon-affilate-blog`** (select repo scope).
-5. **Attach** connector to project `amazon-affiliate-blog`, environment **Production**.
-
-**Likely outcome:** Connect installs a **separate** Vercel-managed GitHub App for agents/API access and optional trigger forwarding to routes like `/api/webhooks/github`. It does **not** replace the deployment GitHub App or restore missing deploy webhooks. If there is no “link repository for deployments” option, stop — continue **Fix auto-deploy Steps 1–4** below.
-
-**Do not confuse:** Account GitHub login at https://vercel.com/account/settings/authentication (Step 3) vs **Connect** connectors (project sidebar, beta).
+- **Integrations** (left sidebar — **not** "Connections"): third-party **marketplace only**. Direct URL: https://vercel.com/murph1/amazon-affiliate-blog/integrations — screenshot shows **"No Integrations Installed"** and Browse Marketplace. **NOT** GitHub repo connection. **NOT** where Vercel links push → deploy.
+- **Connect** (left sidebar, below Domains): Vercel Connect beta for **AI agents / runtime credentials**. Direct URL: https://vercel.com/murph1/amazon-affiliate-blog/connect — installs a **separate** GitHub App for agents, **NOT** the standard push → deploy webhook. **Will not** restore auto-deploy.
 
 **Where git deploy actually lives:** GitHub-side Vercel GitHub App (Step 1) + Vercel account GitHub auth (Step 3). No working **Settings → Git** in Colin's project UI.
 
@@ -129,7 +111,7 @@ Different spellings are fine. Vercel links to a **repo**, not a matching project
 
 ### NEVER tell Colin to look for
 
-- **Integrations** (for Git reconnect — marketplace only; verified empty Jul 16 2026)
+- **Integrations** or **Connect** to fix deploy (both useless — GitHub-only fix: https://github.com/settings/installations)
 - Settings → Domains
 - Settings → Git
 - Create Deployment button
@@ -159,7 +141,7 @@ Hostinger field names: **Type, Name, Value, TTL** (table shows **Content**).
 
 **Root cause:** The Vercel GitHub App webhook/link to this repo is broken or missing. Not a repo-name typo.
 
-**Evidence project was connected once:** Deployments page shows past builds from GitHub commits. The link dropped — fix from **GitHub** (Vercel app permissions / webhook), not from Vercel Integrations or Connect (Beta).
+**Evidence project was connected once:** Deployments page shows past builds from GitHub commits. The link dropped — fix from **GitHub** (Vercel app permissions / webhook), not from Vercel Integrations or Connect.
 
 **Deployments ⋯ menu:** Redeploy only rebuilds the **same old commit** — does not pull new code from GitHub. Not a fix.
 
