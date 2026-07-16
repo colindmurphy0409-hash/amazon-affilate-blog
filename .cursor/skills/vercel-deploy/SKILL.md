@@ -13,8 +13,10 @@ description: >-
 1. **Never tell the user to Deploy with blank Root Directory** if the import/configure screen shows an editable Root Directory field. Set `site` first.
 2. **Never redeploy a failed build** without fixing Root Directory or `vercel.json` first.
 3. **Never assume** Settings → General has Root Directory. It is under **Settings → Build and Deployment** on some accounts, or only on the **import screen**.
-4. **GitHub account on Vercel must match** the account that owns the repo. If Vercel only shows `colindmurphy0409-hash` projects, code must be on that GitHub account — not a different account.
-5. **`vercel.json` at repo root is a fallback**, not a substitute for telling users to set Root Directory to `site` when they can.
+4. **ONLY GitHub account:** `colindmurphy0409-hash` / `colindmurphy0409@gmail.com`. Never use, suggest, or authorize any other GitHub account. User confirmed correct GitHub Jul 16, 2026 — do not instruct logout unless asked.
+5. **Never run `vercel login`** on Colin's PC. OAuth popups risk wrong-account auth. Deploy via `git push origin main` → Vercel auto-build.
+6. **Never name wrong/banned GitHub accounts to the user.** If account mismatch matters, say **"wrong account"** only — never spell other usernames or emails.
+7. **`vercel.json` at repo root is a fallback**, not a substitute for telling users to set Root Directory to `site` when they can.
 
 ## Why builds fail on this repo
 
@@ -89,7 +91,8 @@ Tell user: leave blank only in this case, then Deploy.
 - ❌ "Deploy with blank root directory" when field is visible on import screen
 - ❌ "Redeploy" before fixing root directory
 - ❌ Sending user to Settings → General for Root Directory
-- ❌ Pushing code to `mindbodywallet1-dotcom` when Vercel uses `colindmurphy0409-hash`
+- ❌ Pushing code from or to any GitHub account other than `colindmurphy0409-hash`
+- ❌ Running `vercel login` or naming wrong GitHub accounts to the user
 - ❌ Contradicting prior advice in the same session
 
 ## Agent self-check before any deploy advice

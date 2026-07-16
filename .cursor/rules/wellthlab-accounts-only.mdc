@@ -1,0 +1,41 @@
+---
+description: Wellth Lab — only colindmurphy0409-hash GitHub/Vercel; never mention wrong accounts to user
+alwaysApply: true
+---
+
+# Wellth Lab — Accounts Only
+
+## ONLY account (GitHub + Vercel + git)
+
+| What | Value |
+|------|-------|
+| **GitHub user** | `colindmurphy0409-hash` |
+| **Email** | `colindmurphy0409@gmail.com` |
+| **Git remote** | `git@github.com:colindmurphy0409-hash/amazon-affilate-blog.git` |
+| **Vercel team** | `murph1` |
+| **Vercel project** | `amazon-affiliate-blog` |
+
+**User confirmed signed into the correct GitHub account — Jul 16, 2026.** Do not instruct logout or re-login unless the user explicitly asks.
+
+## NEVER — hard ban for all agents
+
+1. **Never use, suggest, switch to, or authorize any GitHub account other than `colindmurphy0409-hash`.**
+2. **Never run `vercel login`** on Colin's machine — OAuth popups risk wrong-account auth.
+3. **Never mention, reference, or name wrong/banned GitHub accounts to the user.** If account mismatch is relevant, say only **"wrong account"** — never spell out banned usernames or emails.
+4. **Never tell the user to log out of GitHub/Vercel/Cursor** unless they explicitly ask for logout steps.
+
+## Banned (internal agent reference only — never say these names to the user)
+
+Do not use, authorize, push to, or reference in user-facing messages: `mindbodywallet`, `mindbodywallet1-dotcom`, `mindbodywallet-dotcom`, or any GitHub account that is not `colindmurphy0409-hash`.
+
+## OAuth / auth popups
+
+Before clicking Authorize on any GitHub or Vercel OAuth screen:
+
+1. Confirm the username shown is **`colindmurphy0409-hash`**.
+2. If it is a **wrong account** → Cancel / Deny. Do not proceed.
+3. Do not narrate which wrong account appeared — tell the user only that the popup showed the wrong account and they should cancel.
+
+## Deploy path
+
+Push to `main` on `colindmurphy0409-hash/amazon-affilate-blog` → Vercel auto-deploys. No Vercel CLI login. See `HANDOFF.md` for webhook fix steps if auto-deploy is broken.

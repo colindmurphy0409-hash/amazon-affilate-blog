@@ -4,32 +4,30 @@ Paste into a new chat: **"Read HANDOFF.md and continue from here."**
 
 ---
 
-## ⚠️ WRONG GITHUB LOGIN — STOP IMMEDIATELY
+## ⛔ NEVER — WRONG ACCOUNT (read first, every chat)
 
-**Correct account ONLY:** `colindmurphy0409-hash` / `colindmurphy0409@gmail.com`  
-**NEVER use:** `mindbodywallet`, `mindbodywallet1-dotcom`, or any other GitHub account.
+**ONLY GitHub / Vercel / git account:** `colindmurphy0409-hash` / `colindmurphy0409@gmail.com`
 
-### If an OAuth popup appears (Cursor, Vercel CLI, GitHub, Vercel dashboard)
-
-1. **Check the username shown** before clicking Authorize.
-2. If it is **NOT** `colindmurphy0409-hash` → click **Cancel** / **Deny**. Do not proceed.
-3. **Never authorize** `mindbodywallet` or `mindbodywallet1-dotcom` — it breaks deploy webhooks and pushes code to the wrong account.
-
-### Vercel ↔ GitHub must both be `colindmurphy0409-hash`
-
-- **GitHub → Settings → Applications → Vercel → Configure** must be authorized as **`colindmurphy0409-hash`**. Wrong account = no webhook, no auto-deploy.
-- **Vercel → Account → Authentication → GitHub** must show **`colindmurphy0409-hash`** connected (Step 3 below). Reconnect if it shows any other account.
-- **Git remote (verified):** `git@github.com:colindmurphy0409-hash/amazon-affilate-blog.git` — do not change this.
-
-### Log out of wrong GitHub NOW (if wrong account is active)
-
-Open https://github.com/logout, sign out of any `mindbodywallet*` session, then sign in only as **`colindmurphy0409-hash`**. In Cursor: **Settings → Accounts → GitHub → Sign Out**, then sign in again and confirm the popup shows **`colindmurphy0409-hash`**. For Vercel: https://vercel.com/logout → sign in via GitHub as **`colindmurphy0409-hash`** → team **`murph1`**. Clear stale sessions at https://github.com/settings/sessions if needed.
+**User confirmed signed into the correct GitHub account — Jul 16, 2026.** Do not instruct logout or re-login unless Colin explicitly asks.
 
 ### Agent rules (non-negotiable)
 
-1. **Never use, suggest, or authorize any account other than `colindmurphy0409-hash`.**
+1. **Never use, suggest, or authorize any GitHub account other than `colindmurphy0409-hash`.**
 2. **Never run `vercel login`** on Colin's PC (OAuth popups → wrong account risk).
-3. **Never push to or connect any repo under `mindbodywallet*`.**
+3. **Never mention or name wrong/banned GitHub accounts to Colin.** If relevant, say only **"wrong account"** — never spell out other usernames or emails.
+4. **Never tell Colin to log out** of GitHub, Vercel, or Cursor unless he asks.
+
+### OAuth popups (Cursor, GitHub, Vercel dashboard)
+
+1. **Check the username shown** before clicking Authorize.
+2. Must be **`colindmurphy0409-hash`**. If **wrong account** → **Cancel** / **Deny**. Do not proceed.
+3. Wrong account breaks deploy webhooks and pushes code to the wrong place.
+
+### Vercel ↔ GitHub must both be `colindmurphy0409-hash`
+
+- **GitHub → Settings → Applications → Vercel → Configure** — authorized as **`colindmurphy0409-hash`**. Wrong account = no webhook, no auto-deploy.
+- **Vercel → Account → Authentication → GitHub** — must show **`colindmurphy0409-hash`** (Step 3 below). Reconnect if wrong account.
+- **Git remote (verified):** `git@github.com:colindmurphy0409-hash/amazon-affilate-blog.git` — do not change.
 
 ---
 

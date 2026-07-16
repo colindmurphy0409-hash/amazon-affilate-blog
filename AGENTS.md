@@ -2,6 +2,22 @@
 
 This repo is **only** the Amazon affiliate blog at https://amazon-affilate-blog.vercel.app — product reviews, roundups, and comparisons.
 
+## ⛔ NEVER — accounts (every agent, every task)
+
+**ONLY GitHub / Vercel / git:** `colindmurphy0409-hash` / `colindmurphy0409@gmail.com`  
+**Git remote:** `git@github.com:colindmurphy0409-hash/amazon-affilate-blog.git`
+
+**User confirmed correct GitHub — Jul 16, 2026.** Do not instruct logout unless asked.
+
+| Never | Instead |
+|-------|---------|
+| Use or suggest any other GitHub account | Use `colindmurphy0409-hash` only |
+| Run `vercel login` on Colin's PC | Push to `main`; Vercel auto-deploys |
+| Name wrong/banned GitHub accounts to Colin | Say **"wrong account"** only — never spell other usernames |
+| Tell Colin to log out of GitHub/Vercel/Cursor | Only if Colin explicitly asks |
+
+Full rule: `.cursor/rules/wellthlab-accounts-only.mdc`. Deploy context: `HANDOFF.md`.
+
 ## Start here
 
 For full pipelines, use the **amazon-affiliate-orchestrator** skill.
