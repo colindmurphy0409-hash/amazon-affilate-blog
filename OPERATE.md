@@ -1,100 +1,52 @@
-# How to run this (3 commands)
+# How to run this
 
-This is not a content library. It's a **machine** that runs tasks.
+Amazon affiliate landing pages only. No store sync, no social scheduling — just content → validate → build → deploy.
+
+**Live site:** https://amazon-affilate-blog.vercel.app
 
 ## Setup once
 
 ```bat
 run install
-```
-
-## Your weekly loop
-
-### 1. Claude Code makes videos
-Export to `posts/media/` with these names:
-- `day-01-energy.mp4`
-- `day-02-bundle.mp4`
-- ... (see `posts/queue.yaml`)
-
-### 2. You run one command
-
-```bat
-run schedule
-```
-
-This will:
-- Upload each video to Blotato
-- Queue to TikTok + Instagram (next free slot)
-- Mark posts as `scheduled` in `posts/queue.yaml`
-
-### 3. Glance at Blotato app
-Confirm queue looks right. Done.
-
----
-
-## Other commands
-
-| Command | What it does |
-|---------|--------------|
-| `run sync` | Pull latest products from wellthlab.shop |
-| `run status` | Show Blotato accounts + scheduled posts |
-| `run dry-run` | Preview schedule without posting |
-| `run schedule --id day-01-energy` | Schedule one post only |
-
----
-
-## Amazon Affiliate loop
-
-### Setup once
-
-```bat
 run affiliate-install
 ```
 
-Copy `affiliate/config.example.yaml` to `affiliate/config.yaml` and set your Amazon Associates tracking ID.
+Copy `affiliate/config.example.yaml` to `affiliate/config.yaml` and set your Amazon Associates tracking ID (`wellthlab-20`).
 
-### Weekly affiliate loop
+## Weekly loop
 
 1. **Cursor** — "Run affiliate weekly content" or "Build affiliate landing page for {topic}"
 2. **Validate** — `run affiliate-validate`
 3. **Build** — `run affiliate-build`
-4. **Deploy** — upload `site/dist/` to Vercel or Netlify
+4. **Deploy** — push to GitHub → Vercel auto-deploys from `colindmurphy0409-hash/amazon-affilate-blog`
 
-### Affiliate commands
+## Commands
 
 | Command | What it does |
 |---------|--------------|
-| `run affiliate-install` | Install Astro/npm deps in `site/` |
+| `run install` | Install Python deps (once) |
+| `run affiliate-install` | Install Astro/npm deps in `site/` (once) |
 | `run affiliate-link B0XXXXXX` | Build one affiliate URL |
 | `run affiliate-link --all` | Build URLs for all ASINs |
 | `run affiliate-validate` | Compliance + SEO validation |
 | `run affiliate-dev` | Local preview at localhost:4321 |
-| `run affiliate-build` | Production build |
+| `run affiliate-build` | Production build to `site/dist/` |
 
 See [AGENTS.md](AGENTS.md) for the full specialist team and skills.
 
----
+## Publish checklist
 
-## Split with Claude Code
-
-| Claude Code | This project (Cursor) |
-|-------------|----------------------|
-| Write + film videos | Upload + schedule to Blotato |
-| Fix Shopify in admin | `run sync` keeps catalog fresh |
-| Creative one-offs | `run status` — what's queued |
-
-**No copy-paste between AIs.** Claude Code drops files in `posts/media/`. You run `run schedule`.
-
----
+1. Content draft in `content/affiliate/` → published to `site/src/content/affiliate/`
+2. ASIN data in `site/data/asins/*.yaml` and `affiliate/asins/*.yaml`
+3. Product images in `site/public/images/products/`
+4. `run affiliate-validate` exits 0
+5. `published: true` in frontmatter only after validation passes
+6. Push to GitHub
 
 ## In Cursor chat
 
-- "Run schedule" → I execute `run schedule`
-- "Sync my store" → I execute `run sync`
-- "What's queued on Blotato?" → I execute `run status`
-
----
-
-## Reset a post
-
-In `posts/queue.yaml`, change `status: scheduled` back to `status: pending` to re-run.
+- "Run affiliate weekly content" → full pipeline
+- "Build affiliate landing page for {topic}" → new page
+- "Publish affiliate page" → pre-deploy checklist
+- `run affiliate-validate` → compliance + SEO
+- `run affiliate-build` → production build

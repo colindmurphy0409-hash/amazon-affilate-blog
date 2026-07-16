@@ -29,12 +29,12 @@ description: >-
 
 ```
 - [ ] 1. Code pushed to GitHub account that Vercel can see
-- [ ] 2. vercel.com/new → Import amazon-affiliate-blog
+- [ ] 2. vercel.com/new → Import amazon-affilate-blog
 - [ ] 3. Root Directory → Edit → type: site
 - [ ] 4. Framework: Astro (auto)
 - [ ] 5. Deploy (only after step 3)
 - [ ] 6. Green Ready → Visit
-- [ ] 7. Settings → Domains → add wellthlab.blog
+- [ ] 7. Top nav → **Domains** → Add Existing → `wellthlab.blog` (NOT Settings → Domains)
 - [ ] 8. Hostinger DNS records from Vercel
 ```
 
@@ -62,9 +62,25 @@ Repo root `vercel.json` with `cd site` **conflicts** when Root Directory is alre
 
 Tell user: leave blank only in this case, then Deploy.
 
+## Custom domain (wellthlab.blog)
+
+**Never say Settings → Domains** for this user. Their Project Settings sidebar has General, Build and Deployment, Git, etc. — **no Domains item**.
+
+### Where Domains actually is
+
+1. Open the project → click **Domains** in the **top nav bar** (Overview | Deployments | … | **Domains** | Settings)
+2. Or direct URL: `https://vercel.com/murph/amazon-affilate-blog/domains`
+3. Click **Add Existing** → type `wellthlab.blog`
+
+### After adding domain
+
+- **Connect to environment → Production** (NOT redirect to www)
+- Hostinger DNS: A `@` → `76.76.21.21`, CNAME `www` → `cname.vercel-dns.com`
+- "Invalid Configuration" until DNS propagates — normal
+
 ## After deploy
 
-1. Add domain `wellthlab.blog` in Vercel → Domains
+1. Add domain via **Domains tab** (not Settings)
 2. Copy DNS to Hostinger
 3. Submit `https://wellthlab.blog` to Amazon Associates
 

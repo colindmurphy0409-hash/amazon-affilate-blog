@@ -105,12 +105,6 @@ Deploy via Vercel:
 | Published pages | `site/src/content/affiliate/` (symlinked or copied) |
 | Keywords | `seo/affiliate-keywords.yaml` |
 
-## Coexistence
-
-Wellthlab DTC (`posts/`, `products/`) and Amazon affiliate (`affiliate/`,
-`site/`) are separate channels. Do not mix Shopify URLs into affiliate pages
-unless explicitly cross-promoting.
-
 ## Trigger phrases
 
 - "Launch affiliate page for {topic}"

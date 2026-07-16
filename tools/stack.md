@@ -1,57 +1,43 @@
-# Wellthlab content stack
+# Wellth Lab Amazon Affiliate — content stack
 
-## Current tools
+## Tools
+
 | Tool | Role |
 |------|------|
-| **Claude Code** | Store build, Canva asset creation, Higgsfield AI video |
-| **Canva** | Static graphics, carousels, thumbnails |
-| **Higgsfield AI** | Video generation / UGC-style clips |
-| **Blotato** | Schedule + publish to TikTok, Instagram, etc. |
-| **Cursor (this project)** | Scripts, captions, UTMs, email copy, catalog, weekly planning |
-| **Astro** | Amazon affiliate SEO landing pages (`site/`) |
-| **Vercel / Netlify** | Deploy affiliate static site |
+| **Cursor (this project)** | Content, ASIN research, SEO, validation, deploy |
+| **Astro** | Static affiliate landing pages (`site/`) |
+| **Vercel** | Host + auto-deploy from GitHub |
 | **Amazon Associates** | Affiliate tracking + commission reporting |
 
-## Stage (Jul 2026)
-- Site live: wellthlab.shop (new)
-- Sales: pre-revenue / not selling yet
-- Social: small existing presence, building up
+## Live site
+
+**https://amazon-affilate-blog.vercel.app**
+
+Future custom domain: `wellthlab.blog` (not connected yet)
 
 ## Weekly pipeline
 
 ```
-Cursor generates scripts + captions (content/week-XX/social.md)
+Cursor → research + draft content
         ↓
-Claude Code + Canva + Higgsfield → video/image assets
+Update ASINs + images in site/data/ and site/public/images/products/
         ↓
-Blotato → schedule to TikTok / Instagram
+run affiliate-validate → run affiliate-build
         ↓
-Track link clicks + profile visits (before pixel data exists)
+Push to GitHub → Vercel auto-deploy
+        ↓
+Track in kpi/affiliate-weekly-template.csv
 ```
 
-## Blotato upload checklist (per post)
-- [ ] Video file from Higgsfield or Canva
-- [ ] Caption from `content/week-XX/social.md`
-- [ ] Link in bio → product URL with UTM from script
-- [ ] Post time: test 7am, 12pm, 6pm local — note what wins
+## Priorities
 
-## Pre-revenue priorities (first 30 days)
-1. **Post consistently** — 5–7x/week beats perfect content
-2. **One hero product per week** — don't promote all 11 at once
-3. **Link in bio** → Best Value Bundle or Energy Strips (clearest hook)
-4. **Get 3–5 reviews** — friends/family beta or launch discount for honest review
-5. **Fix store bugs** (see store fix list) before pushing paid traffic
-6. **Email capture** — popup/flyout live; Klaviyo welcome flow ready
-7. **Don't run paid ads yet** — until pixels fire + at least 10 organic posts live
-
-## Amazon affiliate priorities (parallel track)
-1. **Set Associates tag** — `affiliate/config.yaml`
-2. **Publish 1 landing page** — `run affiliate-build` → deploy
-3. **One niche cluster** — 3+ interlinked pages before expanding
-4. **Validate every page** — `run affiliate-validate` before go-live
-5. **Track weekly** — `kpi/affiliate-weekly-template.csv`
+1. **Set Associates tag** — `affiliate/config.yaml` (`wellthlab-20`)
+2. **One niche cluster** — 3+ interlinked pages before expanding
+3. **Validate every page** — `run affiliate-validate` before go-live
+4. **Track weekly** — `kpi/affiliate-weekly-template.csv`
 
 ## What to tell Cursor each week
-- `Run weekly social workflow` → fresh scripts for Blotato
-- `Make this Blotato-ready` → strips shot lists into short caption-only cards
-- `Sync catalog from wellthlab.shop` → after any product changes
+
+- `Run affiliate weekly content` → research → draft → page
+- `Build affiliate landing page for {topic}` → single page pipeline
+- `Publish affiliate page` → pre-deploy checklist

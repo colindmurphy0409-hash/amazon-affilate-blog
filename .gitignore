@@ -10,8 +10,3 @@ site/.astro/
 .DS_Store
 Thumbs.db
 *.log
-
-# Video files — drop here locally, don't commit to git
-posts/media/*.mp4
-posts/media/*.mov
-posts/media/*.webm

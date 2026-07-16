@@ -1,77 +1,50 @@
-# Wellthlab Marketing Ops
+# Wellth Lab — Amazon Affiliate Blog
 
-**Not a script folder. A machine that runs tasks.**
+**Live site:** [amazon-affilate-blog.vercel.app](https://amazon-affilate-blog.vercel.app)
 
-Project: [wellthlab.shop](https://wellthlab.shop)
+Research-backed Amazon product reviews, roundups, and comparisons. Astro static site deployed on Vercel.
 
 ## Run this (Windows)
 
 ```bat
-run install          REM once
-run sync             REM pull products from store
-run dry-run          REM preview Blotato schedule
-run schedule         REM upload videos + queue to TikTok/IG
-run status           REM what's connected + queued
-```
-
-Full guide: [OPERATE.md](OPERATE.md)
-
-## Amazon Affiliate (new)
-
-Multi-niche Amazon Associates landing pages via Astro static site.
-
-```bat
+run install              REM once — Python deps
 run affiliate-install    REM once — npm deps in site/
-run affiliate-link --all   REM build affiliate URLs from ASINs
-run affiliate-validate     REM compliance + SEO checks
-run affiliate-dev          REM preview at localhost:4321
-run affiliate-build        REM build to site/dist/
+run affiliate-link --all REM build affiliate URLs from ASINs
+run affiliate-validate   REM compliance + SEO checks
+run affiliate-dev        REM preview at localhost:4321
+run affiliate-build      REM build to site/dist/
 ```
 
-Team roster and skills: [AGENTS.md](AGENTS.md)
+Full guide: [OPERATE.md](OPERATE.md) · Team roster: [AGENTS.md](AGENTS.md) · Session handoff: [HANDOFF.md](HANDOFF.md)
 
-### Affiliate weekly loop
+## Weekly loop
 
-1. **Cursor** — "Run affiliate weekly content" (research → draft → page)
-2. **You** — `run affiliate-validate` then `run affiliate-build`
-3. **Deploy** — push `site/dist/` to Vercel or Netlify
+1. **Cursor** — "Run affiliate weekly content" or "Build affiliate landing page for {topic}"
+2. **Validate** — `run affiliate-validate`
+3. **Build** — `run affiliate-build`
+4. **Deploy** — push to GitHub → Vercel auto-deploys
 
-Copy `affiliate/config.example.yaml` → `affiliate/config.yaml` and set your Associates tracking ID.
+Copy `affiliate/config.example.yaml` → `affiliate/config.yaml` and set your Amazon Associates tracking ID.
 
-## Your weekly loop (Wellthlab DTC)
+## Project layout
 
-1. **Claude Code** — makes videos, saves to `posts/media/` (or paste Higgsfield URLs in `posts/queue.yaml`)
-2. **You** — `run schedule` (or tell Cursor: "run schedule")
-3. **Blotato app** — quick glance at queue. Done.
-
-No copying captions between AIs.
+```
+site/                    Astro affiliate site (Vercel root = site/)
+affiliate/               Associates config + ASIN research
+content/affiliate/       Content drafts (reviews, roundups)
+seo/affiliate-keywords.yaml   Keyword clusters
+scripts/                 Validation + link builder
+AGENTS.md                Specialist team + skills
+OPERATE.md               How to run everything
+HANDOFF.md               Accounts, URLs, session context
+```
 
 ## In Cursor chat
 
 | Say | I run |
 |-----|-------|
-| `run schedule` | Upload + queue posts |
-| `run sync` | Refresh product list from store |
-| `run status` | Blotato accounts + queue |
-
-## Project layout
-
-```
-posts/queue.yaml         Post queue (captions + video paths)
-posts/media/             Drop videos here
-affiliate/               Amazon Associates config + ASIN research
-site/                    Astro affiliate landing pages
-content/affiliate/       Content drafts (reviews, roundups)
-AGENTS.md                Amazon affiliate team roster
-scripts/                 Automation that actually runs
-products/catalog.yaml    Product source of truth
-OPERATE.md               How to use everything
-```
-
-## Claude Code vs Cursor
-
-| Claude Code | This repo |
-|-------------|-----------|
-| Write + film videos | Schedule to Blotato |
-| Shopify admin | `run sync` from live store |
-| Creative | `run status` — what's queued |
+| "Run affiliate weekly content" | Full content pipeline |
+| "Build affiliate landing page for {topic}" | New page workflow |
+| "Publish affiliate page" | Pre-deploy checklist |
+| `run affiliate-validate` | Compliance + SEO checks |
+| `run affiliate-build` | Production build |

@@ -1,13 +1,6 @@
 # Amazon Affiliate Marketing Team
 
-This repo runs two parallel marketing channels:
-
-| Channel | Directories | Purpose |
-|---------|-------------|---------|
-| Wellthlab DTC | `posts/`, `products/`, `content/week-*` | Shopify social + email |
-| Amazon Affiliate | `affiliate/`, `site/`, `content/affiliate/` | SEO landing pages + Associates |
-
-Do not mix Shopify product URLs into affiliate pages unless explicitly cross-promoting.
+This repo is **only** the Amazon affiliate blog at https://amazon-affilate-blog.vercel.app — product reviews, roundups, and comparisons.
 
 ## Start here
 
@@ -31,7 +24,7 @@ Trigger phrases:
 | CRO | `amazon-cro` | CTA layout, conversion audits |
 | Compliance | `amazon-compliance` | FTC + Amazon rules (required gate) |
 | Link builder | `amazon-link-builder` |
-| Vercel deploy | `vercel-deploy` | Affiliate URL generation |
+| Vercel deploy | `vercel-deploy` | Deploy + domain setup |
 
 ## Orchestrator decision tree
 
