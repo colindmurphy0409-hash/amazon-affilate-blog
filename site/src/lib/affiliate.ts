@@ -22,7 +22,8 @@ export interface AsinData {
   best_for?: string;
 }
 
-const repoRoot = path.resolve(import.meta.dirname, '../../../');
+const siteRoot = path.resolve(import.meta.dirname, '../..');
+const repoRoot = path.resolve(siteRoot, '..');
 
 function readYamlFile<T>(filePath: string): T | null {
   if (!fs.existsSync(filePath)) return null;
@@ -30,17 +31,18 @@ function readYamlFile<T>(filePath: string): T | null {
 }
 
 export function getAffiliateConfig(): AffiliateConfig {
-  const configPath = path.join(repoRoot, 'affiliate', 'config.yaml');
-  const examplePath = path.join(repoRoot, 'affiliate', 'config.example.yaml');
-  const config =
-    readYamlFile<AffiliateConfig>(configPath) ??
-    readYamlFile<AffiliateConfig>(examplePath);
+  const paths = [
+    path.join(siteRoot, 'data', 'affiliate-config.yaml'),
+    path.join(repoRoot, 'affiliate', 'config.yaml'),
+    path.join(repoRoot, 'affiliate', 'config.example.yaml'),
+  ];
 
-  if (!config) {
-    throw new Error('Missing affiliate/config.yaml or config.example.yaml');
+  for (const configPath of paths) {
+    const config = readYamlFile<AffiliateConfig>(configPath);
+    if (config) return config;
   }
 
-  return config;
+  throw new Error('Missing affiliate config (site/data/affiliate-config.yaml)');
 }
 
 export function buildAmazonUrl(asin: string, tag?: string): string {
@@ -50,8 +52,17 @@ export function buildAmazonUrl(asin: string, tag?: string): string {
 }
 
 export function getAsinData(asin: string): AsinData | null {
-  const asinPath = path.join(repoRoot, 'affiliate', 'asins', `${asin}.yaml`);
-  const data = readYamlFile<AsinData>(asinPath);
+  const paths = [
+    path.join(siteRoot, 'data', 'asins', `${asin}.yaml`),
+    path.join(repoRoot, 'affiliate', 'asins', `${asin}.yaml`),
+  ];
+
+  let data: AsinData | null = null;
+  for (const asinPath of paths) {
+    data = readYamlFile<AsinData>(asinPath);
+    if (data) break;
+  }
+
   if (!data) return null;
 
   if (!data.affiliate_url) {
