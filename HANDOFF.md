@@ -2,6 +2,48 @@
 
 Paste into a new chat: **"Read HANDOFF.md and continue from here."**
 
+---
+
+## ⚠️ WRONG GITHUB LOGIN — STOP IMMEDIATELY
+
+**Correct account ONLY:** `colindmurphy0409-hash` / `colindmurphy0409@gmail.com`  
+**NEVER use:** `mindbodywallet`, `mindbodywallet1-dotcom`, or any other GitHub account.
+
+### If an OAuth popup appears (Cursor, Vercel CLI, GitHub, Vercel dashboard)
+
+1. **Check the username shown** before clicking Authorize.
+2. If it is **NOT** `colindmurphy0409-hash` → click **Cancel** / **Deny**. Do not proceed.
+3. **Never authorize** `mindbodywallet` or `mindbodywallet1-dotcom` — it breaks deploy webhooks and pushes code to the wrong account.
+
+### Vercel ↔ GitHub must both be `colindmurphy0409-hash`
+
+- **GitHub → Settings → Applications → Vercel → Configure** must be authorized as **`colindmurphy0409-hash`**. Wrong account = no webhook, no auto-deploy.
+- **Vercel → Account → Authentication → GitHub** must show **`colindmurphy0409-hash`** connected (Step 3 below). Reconnect if it shows any other account.
+- **Git remote (verified):** `git@github.com:colindmurphy0409-hash/amazon-affilate-blog.git` — do not change this.
+
+### Log out of wrong GitHub NOW (if wrong account is active)
+
+Open https://github.com/logout, sign out of any `mindbodywallet*` session, then sign in only as **`colindmurphy0409-hash`**. In Cursor/VS Code, revoke wrong credentials: **Settings → Accounts → GitHub → Sign Out**, then sign in again and confirm the popup shows **`colindmurphy0409-hash`**. Clear browser GitHub sessions at https://github.com/settings/sessions if needed.
+
+### Incident — Jul 16, 2026 ~19:17 (verified screenshot)
+
+**Screenshot:** `assets/c__Users_mindb_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_Screenshot_2026-07-16_191738-3b7ed02e-302e-47f0-bfbf-f4f4eb953f02.png`
+
+Vercel showed **"Authorization Successful"** but logged in as **`mindbodywallet1-dotcom` / `mindbodywallet1@gmail.com`** — **WRONG**. Also saw error: **"Errors logging in with GitHub"**.
+
+**If Vercel shows mindbodywallet after auth = WRONG.** Undo and use **`colindmurphy0409-hash` only**.
+
+**Fix (do in order):**
+
+1. **Vercel Log Out** — https://vercel.com/logout (or avatar → Log Out)
+2. **Sign in as `colindmurphy0409-hash`** — GitHub login; confirm popup shows **`colindmurphy0409-hash`**, not mindbodywallet
+3. **Switch to team `murph1`** — top-left team picker → **murph1** (may show as **murph**)
+4. **Reconnect GitHub** — https://vercel.com/account/settings/authentication → GitHub → Disconnect (if shown) → Connect → authorize as **`colindmurphy0409-hash`**
+
+Then continue deploy fix from **Step 1** below.
+
+---
+
 ## THE ONLY THINGS THAT EXIST
 
 | What | Exact name |
@@ -197,9 +239,12 @@ Tell the next chat: *"Step 2 done — webhook yes/no"*.
 
 **Step 3 — Reconnect GitHub account on Vercel (account level, NOT project Git)**
 
+**Prerequisite:** You must be logged into Vercel as **`colindmurphy0409-hash` / team `murph1`**. If you see **mindbodywallet** anywhere after auth, log out and redo — see **Incident — Jul 16, 2026 ~19:17** at top of this file.
+
 1. Open: https://vercel.com/account/settings/authentication  
 2. Under **GitHub**, click **Disconnect** (if shown)  
-3. Click **Connect** / **Reconnect** → authorize as **`colindmurphy0409-hash`** (not mindbodywallet)
+3. Click **Connect** / **Reconnect** → authorize as **`colindmurphy0409-hash`** (not mindbodywallet)  
+4. Confirm no **"Errors logging in with GitHub"** banner — if it persists, log out of Vercel and GitHub in the browser, then retry steps 1–3
 
 Tell the next chat: *"Step 3 done"*.
 
