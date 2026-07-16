@@ -1,0 +1,48 @@
+---
+description: Delegate deploy, auth, and multi-step UI work to background subagents before asking the user
+alwaysApply: true
+---
+
+# Delegate Agents First
+
+**Mandate:** Never burn hours on sequential UI guesses when subagents can investigate autonomously.
+
+## Launch background subagents IMMEDIATELY for
+
+- **Deploy** — Vercel builds, webhooks, auto-deploy failures, domain/DNS issues
+- **Auth** — GitHub/Vercel OAuth, account mismatch, webhook permissions, SSH/git remote
+- **Multi-step UI** — Vercel dashboard, GitHub Settings, Hostinger DNS, any flow requiring navigation
+- **Vercel/GitHub issues** — integration disconnects, missing webhooks, failed CI, wrong deployment
+
+Use `Task` with appropriate `subagent_type` (`explore`, `shell`, `ci-investigator`, `generalPurpose`) and `run_in_background: true` when the work can proceed without blocking the user.
+
+## NEVER do these
+
+1. **Never give the user 10+ sequential UI guesses** when an agent can read `HANDOFF.md`, run CLI checks, or inspect the dashboard via browser tools.
+2. **Never ask the user to navigate menus you have not verified** — agents must confirm paths from `HANDOFF.md`, screenshots, or live inspection first.
+3. **Never stack multiple user actions** without agent verification between steps.
+
+## User interaction limits
+
+| Rule | Detail |
+|------|--------|
+| **Max 2 user actions** | After 2 user steps without resolution, escalate to an agent swarm (parallel background subagents). |
+| **One step at a time** | Give the user exactly ONE verified action per message — only after agents confirm the path. |
+| **Agent-first** | Default: launch agents → synthesize findings → then ask user for the single next step (if still needed). |
+
+## Escalation pattern
+
+```
+Problem detected (deploy/auth/UI)?
+├── Launch 1+ background subagents IMMEDIATELY (do not wait for user)
+├── Read HANDOFF.md + run shell/gh/git checks in parallel
+├── Synthesize agent results
+├── If fixable without user → fix it
+└── If user action required → ONE verified step only
+```
+
+## Cross-references
+
+- Deploy context: `HANDOFF.md`
+- Team roster and skills: `AGENTS.md` → Agent delegation policy
+- Accounts: `.cursor/rules/wellthlab-accounts-only.mdc`

@@ -4,6 +4,23 @@ Paste into a new chat: **"Read HANDOFF.md and continue from here."**
 
 ---
 
+## Agent delegation policy
+
+**Rule:** `.cursor/rules/delegate-agents-first.mdc` (alwaysApply)
+
+Agents must **not** walk Colin through 10+ sequential UI guesses for deploy, auth, or Vercel/GitHub fixes.
+
+| Principle | Action |
+|-----------|--------|
+| **Agents first** | Launch background subagents immediately on deploy/auth/UI issues |
+| **Verify before asking** | Confirm paths from this file, CLI (`gh`, `git`), or agent browser inspection |
+| **One step only** | Give Colin exactly ONE verified action per message |
+| **Max 2 user actions** | After 2 failed user steps → escalate to parallel agent swarm |
+
+This file already documents verified Vercel UI paths (Jul 16, 2026). Agents must read it — not ask Colin for screenshots or menu exploration.
+
+---
+
 ## ⛔ NEVER — WRONG ACCOUNT (read first, every chat)
 
 **ONLY GitHub / Vercel / git account:** `colindmurphy0409-hash` / `colindmurphy0409@gmail.com`

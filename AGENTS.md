@@ -18,6 +18,21 @@ This repo is **only** the Amazon affiliate blog at https://amazon-affilate-blog.
 
 Full rule: `.cursor/rules/wellthlab-accounts-only.mdc`. Deploy context: `HANDOFF.md`.
 
+## Agent delegation policy
+
+**Rule:** `.cursor/rules/delegate-agents-first.mdc` (alwaysApply)
+
+For deploy, auth, multi-step UI, and Vercel/GitHub issues: **launch background subagents immediately** — do not serial-guess through UI menus.
+
+| Do | Don't |
+|----|-------|
+| Launch parallel subagents (`explore`, `shell`, `ci-investigator`) on first sign of trouble | Give the user 10+ sequential UI navigation guesses |
+| Verify paths from `HANDOFF.md`, CLI, or agent inspection before asking the user | Ask Colin to click menus agents haven't confirmed |
+| Give **one verified step at a time** after agents report | Stack multiple user actions without agent verification |
+| Escalate to agent swarm after **max 2** user actions fail | Burn hours on manual trial-and-error |
+
+Deploy and auth context: `HANDOFF.md`.
+
 ## Start here
 
 For full pipelines, use the **amazon-affiliate-orchestrator** skill.
