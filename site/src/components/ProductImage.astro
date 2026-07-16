@@ -1,0 +1,28 @@
+---
+import { buildAmazonImageUrl } from '@/lib/affiliate';
+
+interface Props {
+  asin: string;
+  title: string;
+  size?: 'card' | 'hero' | 'thumb';
+}
+
+const { asin, title, size = 'card' } = Astro.props;
+const src = buildAmazonImageUrl(asin);
+
+const sizeClasses = {
+  hero: 'w-full max-w-sm mx-auto rounded-lg shadow-md',
+  card: 'w-full h-40 object-contain rounded-lg bg-white p-2',
+  thumb: 'w-16 h-16 object-contain rounded bg-white',
+};
+---
+
+<img
+  src={src}
+  alt={title}
+  width="500"
+  height="500"
+  loading="lazy"
+  decoding="async"
+  class={sizeClasses[size]}
+/>

@@ -1,6 +1,8 @@
 ---
 import '@/styles/global.css';
 import { getCollection } from 'astro:content';
+import ProductImage from '@/components/ProductImage.astro';
+import { getAsinData } from '@/lib/affiliate';
 
 const pages = (await getCollection('affiliate'))
   .filter((p) => p.data.published)
@@ -12,8 +14,9 @@ const pages = (await getCollection('affiliate'))
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="content-language" content="en" />
+    <meta http-equiv="content-language" content="en-US" />
     <meta name="google" content="notranslate" />
+    <meta property="og:locale" content="en_US" />
     <title>Affiliate Reviews — Honest Product Guides</title>
     <meta name="description" content="Research-backed Amazon product reviews, roundups, and comparisons. Updated guides to help you buy with confidence." />
   </head>
@@ -33,12 +36,20 @@ const pages = (await getCollection('affiliate'))
 
       {pages.length > 0 ? (
         <ul class="space-y-4">
-          {pages.map((page) => (
+          {pages.map((page) => {
+            const slug = page.id.replace(/\.mdx?$/, '');
+            const primaryAsin = page.data.asins[0] ? getAsinData(page.data.asins[0]) : null;
+            return (
             <li>
               <a
-                href={`/${page.id.replace(/\.mdx?$/, '')}`}
+                href={`/${slug}`}
                 class="block bg-white border border-gray-200 rounded-lg p-4 hover:border-amazon transition-colors"
               >
+                {primaryAsin && (
+                  <div class="mb-3">
+                    <ProductImage asin={primaryAsin.asin} title={primaryAsin.title} size="card" />
+                  </div>
+                )}
                 <span class="text-xs font-semibold uppercase tracking-wide text-amazon">
                   {page.data.type}
                 </span>
@@ -46,7 +57,8 @@ const pages = (await getCollection('affiliate'))
                 <p class="text-gray-600 text-sm mt-1">{page.data.description}</p>
               </a>
             </li>
-          ))}
+            );
+          })}
         </ul>
       ) : (
         <p class="text-gray-500">No published pages yet.</p>

@@ -51,6 +51,10 @@ export function buildAmazonUrl(asin: string, tag?: string): string {
   return `https://www.amazon.com/dp/${asin}?tag=${associateTag}`;
 }
 
+export function buildAmazonImageUrl(asin: string, size = 500): string {
+  return `https://m.media-amazon.com/images/P/${asin}.01._SL${size}_.jpg`;
+}
+
 export function getAsinData(asin: string): AsinData | null {
   const paths = [
     path.join(siteRoot, 'data', 'asins', `${asin}.yaml`),

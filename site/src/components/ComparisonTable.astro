@@ -1,6 +1,7 @@
 ---
 import type { AsinData } from '@/lib/affiliate';
 import AmazonCTA from './AmazonCTA.astro';
+import ProductImage from './ProductImage.astro';
 
 interface Props {
   asins: AsinData[];
@@ -24,7 +25,12 @@ const { asins, highlightAsin } = Astro.props;
     <tbody>
       {asins.map((asin) => (
         <tr class:list={['border-b', highlightAsin === asin.asin && 'bg-amber-50']}>
-          <td class="p-3 font-medium">{asin.title}</td>
+          <td class="p-3 font-medium">
+            <div class="flex items-center gap-3">
+              <ProductImage asin={asin.asin} title={asin.title} size="thumb" />
+              <span>{asin.title}</span>
+            </div>
+          </td>
           <td class="p-3">{asin.rating ? `${asin.rating}/5` : '—'}</td>
           <td class="p-3">{asin.price_band ?? '—'}</td>
           <td class="p-3 text-sm">{asin.best_for ?? '—'}</td>
