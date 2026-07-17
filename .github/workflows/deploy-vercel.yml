@@ -51,22 +51,20 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
-      - name: Link, build on Vercel, deploy prebuilt to production
+      - name: Deploy dist to Vercel production
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           set -euo pipefail
           vercel link --yes --project=amazon-affiliate-blog --scope=murph1 --token="$VERCEL_TOKEN"
-          vercel pull --yes --environment=production --token="$VERCEL_TOKEN" --scope=murph1
-          vercel build --prod --token="$VERCEL_TOKEN" --scope=murph1
-          DEPLOY_URL="$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --scope=murph1)"
+          DEPLOY_URL="$(vercel deploy dist --prod --token="$VERCEL_TOKEN" --scope=murph1)"
           echo "Deployed to: $DEPLOY_URL"
           curl -fsSL "$DEPLOY_URL/tymo-curlpro-review/" | grep -qi "TYMO"
-          curl -fsSL "$DEPLOY_URL/images/products/B0DBZS6MHK.jpg" | wc -c | awk '{ if ($1 < 500) { print "TYMO image too small"; exit 1 } }'
+          test "$(curl -fsSL "$DEPLOY_URL/images/products/B0DBZS6MHK.jpg" | wc -c)" -gt 500
           vercel alias set "$DEPLOY_URL" wellthlab.blog --token="$VERCEL_TOKEN" --scope=murph1
           vercel alias set "$DEPLOY_URL" amazon-affiliate-blog.vercel.app --token="$VERCEL_TOKEN" --scope=murph1
           for attempt in 1 2 3 4 5 6; do
-            if curl -fsSL "https://wellthlab.blog/tymo-curlpro-review/" | grep -qi "TYMO"; then
+            if curl -fsSL "https://wellthlab.blog/" | grep -qi "category-pill-beauty"; then
               echo "Production alias verified on attempt $attempt"
               exit 0
             fi
