@@ -31,6 +31,18 @@ jobs:
       - name: Install and build
         run: |
           npm ci
+          npm run fetch-images
+          echo "Checking product image file sizes..."
+          python3 << 'PYEOF'
+          import glob, os, sys
+          MIN_SIZE = 500
+          bad = [f for f in glob.glob('public/images/products/*.jpg') if os.path.getsize(f) <= MIN_SIZE]
+          if bad:
+              for f in bad:
+                  print(f'CORRUPT IMAGE ({os.path.getsize(f)} bytes): {f}')
+              sys.exit(1)
+          print(f'All {len(glob.glob("public/images/products/*.jpg"))} product images OK (> {MIN_SIZE} bytes)')
+          PYEOF
           npm run build
           test -f dist/tymo-curlpro-review/index.html
           test -f dist/index.html

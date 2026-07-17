@@ -25,7 +25,7 @@ const { asins, highlightAsin } = Astro.props;
       >
         <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
           <div class="mx-auto w-full max-w-[180px] shrink-0 sm:mx-0">
-            <ProductImage asin={asin.asin} title={asin.title} size="card" />
+            <ProductImage asin={asin.asin} title={asin.title} imageUrl={asin.image_url} size="card" />
           </div>
           <div class="min-w-0 flex-1">
             {highlightAsin === asin.asin && (

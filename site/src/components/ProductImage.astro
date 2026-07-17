@@ -1,20 +1,24 @@
 ---
-import { buildAmazonImageUrl, buildAmazonImageFallbackUrl } from '@/lib/affiliate';
+import { getAsinData, resolveProductImageSrc } from '@/lib/affiliate';
 
 interface Props {
   asin: string;
   title: string;
   size?: 'card' | 'hero' | 'thumb';
+  imageUrl?: string;
 }
 
-const { asin, title, size = 'card' } = Astro.props;
-const src = buildAmazonImageUrl(asin);
-const fallback = buildAmazonImageFallbackUrl(asin);
+const { asin, title, size = 'card', imageUrl } = Astro.props;
+const asinData = getAsinData(asin);
+const { primary: src, fallback } = resolveProductImageSrc({
+  asin,
+  image_url: imageUrl ?? asinData?.image_url,
+});
 
 const sizeClasses = {
-  hero: 'mx-auto w-full max-w-md rounded-2xl bg-white p-6 shadow-card ring-1 ring-slate-200/80',
-  card: 'aspect-[4/3] w-full overflow-hidden rounded-xl bg-white p-4 ring-1 ring-slate-200/80',
-  thumb: 'h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-white p-1 ring-1 ring-slate-200/80',
+  hero: 'mx-auto w-full max-w-md rounded-2xl bg-white/90 p-6 shadow-card ring-1 ring-white/60 backdrop-blur-sm',
+  card: 'aspect-[4/3] w-full overflow-hidden rounded-xl bg-white/90 p-4 ring-1 ring-white/50 backdrop-blur-sm',
+  thumb: 'h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-white/90 p-1 ring-1 ring-white/50',
 };
 
 const imgClasses = {
@@ -32,6 +36,7 @@ const imgClasses = {
     height="500"
     loading="lazy"
     decoding="async"
+    referrerpolicy="no-referrer"
     class={imgClasses[size]}
     onerror={`this.onerror=null;this.src='${fallback}';`}
   />

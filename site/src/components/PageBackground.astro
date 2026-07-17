@@ -1,0 +1,31 @@
+---
+interface Props {
+  variant?: 'default' | 'hero';
+}
+
+const { variant = 'default' } = Astro.props;
+---
+
+<div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+  <div class="absolute inset-0 bg-mesh" />
+  <div class="absolute -left-32 top-20 h-72 w-72 rounded-full bg-brand-200/40 blur-3xl" />
+  <div class="absolute right-0 top-40 h-96 w-96 rounded-full bg-coral-200/35 blur-3xl" />
+  <div class="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-gold-200/30 blur-3xl" />
+  <div class="absolute -right-20 bottom-32 h-64 w-64 rounded-full bg-sage-200/40 blur-3xl" />
+  {
+    variant === 'hero' && (
+      <>
+        <svg class="absolute right-[8%] top-24 h-32 w-32 text-brand-400/20" viewBox="0 0 120 120" fill="currentColor">
+          <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" stroke-width="2" />
+          <circle cx="60" cy="60" r="28" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6" />
+        </svg>
+        <svg class="absolute left-[6%] top-48 h-24 w-24 text-coral-400/25" viewBox="0 0 80 80" fill="currentColor">
+          <path d="M40 8 L72 40 L40 72 L8 40 Z" fill="none" stroke="currentColor" stroke-width="2" />
+        </svg>
+        <svg class="absolute bottom-24 right-[18%] h-20 w-20 text-gold-400/30" viewBox="0 0 64 64" fill="currentColor">
+          <path d="M32 4 L38 26 L60 32 L38 38 L32 60 L26 38 L4 32 L26 26 Z" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </svg>
+      </>
+    )
+  }
+</div>
