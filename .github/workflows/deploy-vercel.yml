@@ -62,7 +62,16 @@ jobs:
           DEPLOY_URL="$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --scope=murph1)"
           echo "Deployed to: $DEPLOY_URL"
           curl -fsSL "$DEPLOY_URL/tymo-curlpro-review/" | grep -qi "TYMO"
-          vercel alias set "$DEPLOY_URL" wellthlab.blog --token="$VERCEL_TOKEN" --scope=murph1 --yes
-          vercel alias set "$DEPLOY_URL" amazon-affiliate-blog.vercel.app --token="$VERCEL_TOKEN" --scope=murph1 --yes
-          sleep 5
-          curl -fsSL "https://wellthlab.blog/tymo-curlpro-review/" | grep -qi "TYMO"
+          curl -fsSL "$DEPLOY_URL/images/products/B0DBZS6MHK.jpg" | wc -c | awk '{ if ($1 < 500) { print "TYMO image too small"; exit 1 } }'
+          vercel alias set "$DEPLOY_URL" wellthlab.blog --token="$VERCEL_TOKEN" --scope=murph1
+          vercel alias set "$DEPLOY_URL" amazon-affiliate-blog.vercel.app --token="$VERCEL_TOKEN" --scope=murph1
+          for attempt in 1 2 3 4 5 6; do
+            if curl -fsSL "https://wellthlab.blog/tymo-curlpro-review/" | grep -qi "TYMO"; then
+              echo "Production alias verified on attempt $attempt"
+              exit 0
+            fi
+            echo "Waiting for alias propagation (attempt $attempt)..."
+            sleep 15
+          done
+          echo "Alias verification timed out after 90s"
+          exit 1
