@@ -1,17 +1,16 @@
-# Sample niche — replace or duplicate for new categories
-
 name: kitchen-gadgets
-description: Compact kitchen tools and small appliances for home cooks
-updated: 2026-07-15
-
+description: Compact kitchen tools — air fryers, immersion blenders, and small-appliance picks for everyday cooking
+updated: 2026-07-20
 target_keywords:
-  - best air fryer small kitchen
-  - best immersion blender 2026
-  - kitchen gadgets under 50
-
+  - best immersion blender under 50
+  - best air fryer for small kitchen
+  - hand blender for smoothies
 angles:
   - budget picks under $50
-  - small apartment / limited counter space
-  - beginner home cook essentials
-
-priority_asins: []
+  - small kitchen / apartment friendly
+  - accessory kits vs bare-bones sticks
+priority_asins:
+  - B075X1KPLZ
+  - B01EA5ZI2U
+  - B09CYFZ9KB
+  - B079NJTL29

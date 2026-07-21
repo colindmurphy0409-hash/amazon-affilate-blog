@@ -1,6 +1,6 @@
 ---
 title: "MERIDIAN Trimmer Review: A Solid Body Groomer Without the Hype Tax"
-description: "The MERIDIAN Trimmer Original is one of Amazon's most popular body groomers. We break down who it suits, how it handles sensitive areas, and where cheaper trimmers still make sense."
+description: "Popular MERIDIAN body groomer reviewed — who it suits, sensitive-area performance, and where cheaper trimmers still make sense."
 type: review
 primary_keyword: "meridian trimmer review"
 asins:

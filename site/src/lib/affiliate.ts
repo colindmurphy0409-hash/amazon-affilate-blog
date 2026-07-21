@@ -118,6 +118,7 @@ export function nicheLabel(niche?: string): string {
     case 'fitness':
       return 'Fitness';
     case 'home':
+    case 'kitchen-gadgets':
       return 'Home';
     default:
       return 'Guide';
@@ -131,6 +132,7 @@ export function nicheBadgeClass(niche?: string): string {
     case 'fitness':
       return 'badge-fitness';
     case 'home':
+    case 'kitchen-gadgets':
       return 'badge-home';
     default:
       return 'badge-type';

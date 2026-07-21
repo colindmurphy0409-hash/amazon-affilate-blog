@@ -1,5 +1,5 @@
 ---
-title: "RENPHO MorphoScan Nova vs Withings Body Smart: Which Smart Scale Is Worth It?"
+title: "RENPHO MorphoScan vs Withings Body Smart: Best Scale?"
 description: "RENPHO's 8-electrode MorphoScan Nova vs the Withings Body Smart — compared on accuracy, Wi-Fi sync, battery, and who each scale is actually built for."
 type: comparison
 primary_keyword: "renpho morphoscan vs withings body smart"

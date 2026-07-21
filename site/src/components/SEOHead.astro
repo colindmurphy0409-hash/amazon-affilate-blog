@@ -12,6 +12,7 @@ interface Props {
 
 const { title, description, type, slug, asins, siteUrl = 'https://wellthlab.blog' } = Astro.props;
 const canonical = new URL(`/${slug}`, siteUrl).toString();
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 const schema = type === 'roundup'
   ? {
@@ -60,6 +61,9 @@ const schema = type === 'roundup'
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{googleVerification && (
+  <meta name="google-site-verification" content={googleVerification} />
+)}
 <meta http-equiv="content-language" content="en-US" />
 <meta name="google" content="notranslate" />
 <meta property="og:locale" content="en_US" />

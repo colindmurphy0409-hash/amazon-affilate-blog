@@ -1,1 +1,3 @@
+date,sessions,amazon_clicks,ctr_pct,new_pages,top_page,niche,notes
 2026-07-15,0,0,0,0,best-air-fryers-small-kitchen,kitchen-gadgets,Pipeline proof page — baseline before deploy
+2026-07-20,0,0,0,1,best-immersion-blenders-under-50,kitchen-gadgets,SEO foundation (sitemap/analytics) + immersion blender roundup published

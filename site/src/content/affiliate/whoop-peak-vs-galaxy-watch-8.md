@@ -1,5 +1,5 @@
 ---
-title: "WHOOP Peak vs Samsung Galaxy Watch 8: Which Fitness Tracker Fits Your Life?"
+title: "WHOOP Peak vs Galaxy Watch 8: Which Tracker Wins?"
 description: "WHOOP Peak and the Galaxy Watch 8 both track health — but they work very differently. Compare recovery coaching, battery life, price, and who should buy which."
 type: comparison
 primary_keyword: "whoop vs samsung galaxy watch 8"

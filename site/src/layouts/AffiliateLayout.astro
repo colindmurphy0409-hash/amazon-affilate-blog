@@ -9,6 +9,7 @@ import StickyCTA from '@/components/StickyCTA.astro';
 import ProductCard from '@/components/ProductCard.astro';
 import SiteHeader from '@/components/SiteHeader.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
+import SiteAnalytics from '@/components/SiteAnalytics.astro';
 import { getAffiliateConfig, getAsinDataList, nicheBadgeClass, nicheLabel } from '@/lib/affiliate';
 
 interface Props {
@@ -172,5 +173,6 @@ const typeLabels = {
     <SiteFooter />
 
     {stickyAsin && <StickyCTA asin={stickyAsin} text={hero_cta_text} />}
+    <SiteAnalytics />
   </body>
 </html>

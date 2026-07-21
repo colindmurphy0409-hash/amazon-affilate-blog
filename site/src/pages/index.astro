@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import ProductImage from '@/components/ProductImage.astro';
 import SiteHeader from '@/components/SiteHeader.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
+import SiteAnalytics from '@/components/SiteAnalytics.astro';
 import StarRating from '@/components/StarRating.astro';
 import { getAffiliateConfig, getAsinData, nicheBadgeClass, nicheLabel, nicheStripClass } from '@/lib/affiliate';
 
@@ -33,6 +34,10 @@ const typeLabels = {
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{config.site_name} — Honest Product Guides</title>
     <meta name="description" content="Research-backed Amazon product reviews, roundups, and comparisons. Updated guides to help you buy with confidence." />
+    <link rel="canonical" href={config.site_url} />
+    {import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION && (
+      <meta name="google-site-verification" content={import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION} />
+    )}
   </head>
   <body>
     <SiteHeader />
@@ -127,5 +132,6 @@ const typeLabels = {
     </main>
 
     <SiteFooter />
+    <SiteAnalytics />
   </body>
 </html>

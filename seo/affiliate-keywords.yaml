@@ -31,5 +31,9 @@ clusters:
       - title: "Best Immersion Blenders Under $50"
         type: roundup
         slug: best-immersion-blenders-under-50
-        status: queued
-        target_asins: []
+        status: published
+        target_asins:
+          - B075X1KPLZ
+          - B01EA5ZI2U
+          - B09CYFZ9KB
+          - B079NJTL29
