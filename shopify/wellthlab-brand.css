@@ -1,0 +1,353 @@
+/**
+ * Wellthlab — Lab Clean brand overrides
+ * Theme: Shopify Horizon 4.0.0
+ *
+ * Install:
+ *   1. Shopify Admin → Online Store → Themes → Edit code
+ *   2. Replace assets/wellthlab-brand.css with this file
+ *   3. Remove wl-polish.css from theme.liquid (stylesheet + any script tags)
+ *   4. Theme settings → colors/fonts → match tokens below
+ *
+ * Audit: shopify/ (Jul 2026) — aligns with site/tailwind.config.mjs
+ */
+
+:root {
+  /* Ink */
+  --wl-ink: #0f172a;
+  --wl-ink-soft: #475569;
+  --wl-ink-faint: #94a3b8;
+
+  /* Surfaces */
+  --wl-white: #ffffff;
+  --wl-cream: #fafaf8;
+  --wl-surface: #f1f5f9;
+  --wl-border: #e2e8f0;
+
+  /* Primary accent — single teal, no purple */
+  --wl-primary: #0d9488;
+  --wl-primary-hover: #0f766e;
+  --wl-primary-light: #ccfbf1;
+  --wl-primary-muted: #14b8a6;
+
+  /* Semantic */
+  --wl-success: #059669;
+  --wl-sale: #dc2626;
+  --wl-error: #b91c1c;
+
+  /* Layout */
+  --wl-radius-sm: 8px;
+  --wl-radius-md: 10px;
+  --wl-radius-lg: 16px;
+  --wl-shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
+
+  /* Typography */
+  --wl-font-display: "Fraunces", Georgia, serif;
+  --wl-font-body: "Source Sans 3", system-ui, sans-serif;
+
+  /* Hero overlay — neutral only */
+  --wl-grad-hero: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.55) 0%,
+    rgba(15, 23, 42, 0.15) 100%
+  );
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+
+body {
+  background-color: var(--wl-cream);
+  color: var(--wl-ink);
+  font-family: var(--wl-font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+.wl-display {
+  font-family: var(--wl-font-display);
+  font-weight: 600;
+  color: var(--wl-ink);
+}
+
+p,
+li,
+span,
+label {
+  color: var(--wl-ink-soft);
+}
+
+/* ── Header — light, not dark forest ─────────────────────── */
+
+#header-component,
+.shopify-section-header,
+header.header {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border-bottom: 1px solid var(--wl-border);
+  box-shadow: none;
+}
+
+#header-component .header__menu-item,
+#header-component .header__icon,
+#header-component a,
+header.header a {
+  color: var(--wl-ink) !important;
+}
+
+#header-component .header__menu-item:hover,
+header.header a:hover {
+  color: var(--wl-primary) !important;
+}
+
+/* ── Announcement bar — solid teal, no gradient ──────────── */
+
+.announcement-bar,
+.shopify-section-announcement-bar {
+  background: var(--wl-primary-hover) !important;
+  background-image: none !important;
+  color: var(--wl-white);
+}
+
+.announcement-bar a {
+  color: var(--wl-white);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Buttons — solid teal, 10px radius, no pill ────────────── */
+
+.button,
+button.button,
+.shopify-payment-button__button,
+.product-form__submit,
+.cart__checkout-button,
+a.button {
+  background: var(--wl-primary) !important;
+  background-image: none !important;
+  border: 1px solid var(--wl-primary) !important;
+  border-radius: var(--wl-radius-md) !important;
+  color: var(--wl-white) !important;
+  font-family: var(--wl-font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  box-shadow: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.button:hover,
+button.button:hover,
+.product-form__submit:hover,
+a.button:hover {
+  background: var(--wl-primary-hover) !important;
+  border-color: var(--wl-primary-hover) !important;
+  color: var(--wl-white) !important;
+}
+
+.button--secondary,
+button.button--secondary {
+  background: var(--wl-white) !important;
+  border: 1px solid var(--wl-border) !important;
+  color: var(--wl-ink) !important;
+}
+
+.button--secondary:hover {
+  border-color: var(--wl-primary) !important;
+  color: var(--wl-primary) !important;
+}
+
+/* ── Links & accents — remove purple ───────────────────────── */
+
+a {
+  color: var(--wl-primary);
+}
+
+a:hover {
+  color: var(--wl-primary-hover);
+}
+
+.price,
+.product-card__price,
+.product__price {
+  color: var(--wl-primary) !important;
+}
+
+.badge,
+.product-card__badge {
+  background: var(--wl-primary-light);
+  color: var(--wl-primary-hover);
+  border-radius: var(--wl-radius-sm);
+}
+
+/* ── Product cards & wells ─────────────────────────────────── */
+
+.product-card,
+.card,
+.card-wrapper {
+  border-radius: var(--wl-radius-lg);
+  border: 1px solid var(--wl-border);
+  box-shadow: var(--wl-shadow-card);
+  background: var(--wl-white);
+}
+
+.product-card__media,
+.card__media,
+.product__media,
+.media-gallery,
+.product-media-container {
+  background-color: var(--wl-surface) !important;
+}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+
+.hero,
+.banner,
+.image-banner {
+  --color-background: var(--wl-cream);
+}
+
+.hero__overlay,
+.banner__overlay,
+.image-banner__overlay {
+  background: var(--wl-grad-hero) !important;
+  background-image: var(--wl-grad-hero) !important;
+}
+
+.hero h1,
+.banner h1,
+.image-banner h1 {
+  color: var(--wl-white);
+  font-family: var(--wl-font-display);
+}
+
+/* Trust chips row (add in theme editor as rich text / custom liquid) */
+.wl-trust-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.wl-trust-chips span {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--wl-radius-sm);
+  color: var(--wl-white);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* ── Sections ───────────────────────────────────────────────── */
+
+.shopify-section {
+  --section-padding: clamp(48px, 6vw, 96px);
+}
+
+.color-scheme--accent,
+.color-background-accent {
+  background-color: var(--wl-surface) !important;
+}
+
+/* Dark alternate sections — use ink, not forest green */
+.color-scheme--dark,
+.color-background-dark {
+  background-color: var(--wl-ink) !important;
+  color: var(--wl-white);
+}
+
+/* ── Forms & inputs ────────────────────────────────────────── */
+
+input,
+select,
+textarea,
+.field__input {
+  border-radius: var(--wl-radius-sm);
+  border-color: var(--wl-border);
+  font-family: var(--wl-font-body);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.field__input:focus {
+  border-color: var(--wl-primary);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+  outline: none;
+}
+
+/* ── Cart drawer ─────────────────────────────────────────────── */
+
+.cart-drawer,
+.drawer__inner {
+  background: var(--wl-white);
+}
+
+.cart-drawer__footer,
+.drawer__footer {
+  border-top: 1px solid var(--wl-border);
+}
+
+/* Free shipping progress bar — pair with app or custom liquid */
+.wl-shipping-bar {
+  padding: 12px 16px;
+  background: var(--wl-surface);
+  border-bottom: 1px solid var(--wl-border);
+  font-size: 0.875rem;
+  color: var(--wl-ink-soft);
+}
+
+.wl-shipping-bar__track {
+  height: 6px;
+  background: var(--wl-border);
+  border-radius: 999px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.wl-shipping-bar__fill {
+  height: 100%;
+  background: var(--wl-primary);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* ── Quick add — full text on mobile ─────────────────────────── */
+
+.quick-add__submit,
+.wl-qa__btn {
+  min-height: 44px;
+  width: 100%;
+  border-radius: var(--wl-radius-md);
+  font-size: 0.875rem;
+}
+
+/* ── Reviews — hide empty placeholder section ──────────────── */
+
+.wl-reviews-empty {
+  display: none;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+
+footer.footer,
+.shopify-section-footer {
+  background: var(--wl-ink);
+  color: var(--wl-ink-faint);
+}
+
+footer.footer a {
+  color: var(--wl-white);
+}
+
+footer.footer a:hover {
+  color: var(--wl-primary-muted);
+}
+
+/* ── Utility: hide branding leaks until fixed in Liquid ──────── */
+
+.wl-hide-vitalitas {
+  display: none !important;
+}

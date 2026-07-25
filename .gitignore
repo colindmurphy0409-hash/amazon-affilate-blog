@@ -3,6 +3,7 @@ site/node_modules/
 site/dist/
 .env
 affiliate/config.yaml
+tools/canva.yaml
 .cursor/mcp.json
 __pycache__/
 *.pyc

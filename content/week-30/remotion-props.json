@@ -1,0 +1,28 @@
+{
+  "compositions": [
+    {
+      "id": "HookReel",
+      "output": "posts/media/day-01-energy-hook.mp4",
+      "props": {
+        "hook": "3pm and I'm done. Unless...",
+        "productImage": "energy-strips.png",
+        "captionLines": ["Clean lift", "Zero crash", "No water needed"],
+        "cta": "wellthlab.shop"
+      }
+    },
+    {
+      "id": "EducationStrip",
+      "output": "posts/media/day-05-strips-edu.mp4",
+      "props": {
+        "title": "Why strips beat pills",
+        "tips": [
+          "No water — dissolves on your tongue",
+          "Fits in a pocket tin",
+          "Clean label, third-party tested"
+        ],
+        "productImage": "energy-strips.png",
+        "cta": "wellthlab.shop"
+      }
+    }
+  ]
+}

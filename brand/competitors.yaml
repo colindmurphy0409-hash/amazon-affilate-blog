@@ -1,0 +1,73 @@
+# Top brands to study — agents adapt their marketing patterns to Wellthlab
+#
+# HOW TO USE
+# 1. Add brands you admire below (DTC supplements, wellness, oral formats, etc.)
+# 2. Say: "Run competitor research" or "Research competitor brands"
+# 3. Agents write playbooks to content/research/competitors/{slug}.md
+# 4. Weekly content pulls adapted hooks from those playbooks + trend-brief.md
+#
+# RULES FOR AGENTS
+# - Borrow FORMATS (hooks, pacing, carousel structure, video beats) — not verbatim copy
+# - Never claim Wellthlab is those brands; never fake their social proof
+# - Transform everything through brand/voice.md + brand/assets.md (exact product images only)
+# - Structure/function claims only for supplement angles
+
+updated: 2026-07-25
+
+brands:
+  # --- Oral / on-the-go formats (closest comps) ---
+  - slug: pouch-affiliate-brands
+    name: "On-the-go pouch brands (Liquid I.V., LMNT-style)"
+    category: hydration / electrolytes
+    priority: high
+    why_watch: "Pocket-format DTC, problem→solution hooks, bold text-on-screen Reels"
+    handles:
+      tiktok: ""
+      instagram: ""
+    urls: []
+    notes: "Study format and pacing; Wellthlab differentiator is oral strips not powder"
+
+  # --- Premium supplement DTC ---
+  - slug: ag1
+    name: "AG1 (Athletic Greens)"
+    category: premium daily supplement
+    priority: medium
+    why_watch: "Routine stacking, science-forward carousels, subscription framing"
+    handles:
+      tiktok: "@drinkag1"
+      instagram: "@drinkag1"
+    urls:
+      - https://www.tiktok.com/@drinkag1
+    notes: "Differentiate: strips not scoops, no shaker, pocket tin"
+
+  # --- Clean label / transparent dosing ---
+  - slug: transparent-labs
+    name: "Transparent Labs"
+    category: performance supplements
+    priority: medium
+    why_watch: "Clean label education, no proprietary blend messaging"
+    handles:
+      tiktok: ""
+      instagram: "@transparentlabs"
+    urls: []
+    notes: "Aligns with Wellthlab third-party tested / real doses pillar"
+
+  # --- Add your picks below ---
+  # - slug: your-brand-slug
+  #   name: "Brand Name"
+  #   category: ""
+  #   priority: high | medium | low
+  #   why_watch: "What you want to learn from them"
+  #   handles:
+  #     tiktok: "@handle"
+  #     instagram: "@handle"
+  #   urls:
+  #     - https://www.tiktok.com/@handle
+  #     - https://www.instagram.com/handle
+  #   notes: "Optional differentiation notes for Wellthlab"
+
+research_settings:
+  max_brands_per_run: 5
+  prefer_priority: high
+  output_dir: content/research/competitors
+  refresh_after_days: 14

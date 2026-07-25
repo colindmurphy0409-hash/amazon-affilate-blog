@@ -1,6 +1,13 @@
-# Amazon Affiliate Marketing Team
+# Marketing Team — Wellthlab DTC + Amazon Affiliate
 
-This repo is **only** the Amazon affiliate blog at https://amazon-affilate-blog.vercel.app — product reviews, roundups, and comparisons.
+This repo runs **two parallel marketing channels**:
+
+| Channel | Directories | Purpose |
+|---------|-------------|---------|
+| Wellthlab DTC | `posts/`, `products/`, `content/week-*`, `video/` | Shopify social + email |
+| Amazon Affiliate | `affiliate/`, `site/`, `content/affiliate/` | SEO landing pages + Associates |
+
+Affiliate site: https://amazon-affilate-blog.vercel.app
 
 ## ⛔ NEVER — accounts (every agent, every task)
 
@@ -33,11 +40,29 @@ For deploy, auth, multi-step UI, and Vercel/GitHub issues: **launch background s
 
 Deploy and auth context: `HANDOFF.md`.
 
+## DTC brand rules (Wellthlab social / video / Canva)
+
+All DTC agents must follow `brand/assets.md`:
+
+- **Exact product images only** — official Shopify CDN URLs; never AI-generate or hallucinate product packaging
+- **On-brand colors** — `brand/canva.md` / `video/src/brand.ts`
+- **On-brand tone** — `brand/voice.md`
+
 ## Start here
 
-For full pipelines, use the **amazon-affiliate-orchestrator** skill.
+| Goal | Skill / workflow |
+|------|------------------|
+| Social content pipeline | **wellthlab-content-orchestrator** → `workflows/content-pipeline.md` |
+| Affiliate page launch | **amazon-affiliate-orchestrator** |
 
-Trigger phrases:
+### DTC trigger phrases
+- "Run Wellthlab content pipeline"
+- "Run full trend research"
+- "Run competitor research" / "Research competitor {name}"
+- "Run weekly social workflow"
+- "Approve week XX" / "Schedule week XX queue"
+
+### Affiliate trigger phrases
 - "Launch affiliate page for {topic}"
 - "Run full affiliate workflow"
 - "Amazon affiliate team"
@@ -46,6 +71,7 @@ Trigger phrases:
 
 | Role | Skill | When to use |
 |------|-------|-------------|
+| DTC content lead | `wellthlab-content-orchestrator` | Weekly social pipeline, Blotato/Canva/Remotion |
 | Team lead | `amazon-affiliate-orchestrator` | End-to-end page launches |
 | Product research | `amazon-product-research` | Niche ideas, ASIN shortlists |
 | Content writer | `amazon-content-writer` | Reviews, roundups, comparisons |
@@ -90,6 +116,10 @@ New page request?
 
 | Say in chat | Workflow file |
 |-------------|---------------|
+| "Run Wellthlab content pipeline" | `workflows/content-pipeline.md` |
+| "Run full trend research" | `workflows/trend-research.md` |
+| "Run competitor research" | `workflows/competitor-research.md` |
+| "Run weekly social workflow" | `workflows/weekly-social.md` |
 | "Run affiliate product research" | `workflows/affiliate-product-research.md` |
 | "Build affiliate landing page for {topic}" | `workflows/affiliate-landing-page.md` |
 | "Publish affiliate page" | `workflows/affiliate-publish-checklist.md` |

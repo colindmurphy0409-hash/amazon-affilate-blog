@@ -1,0 +1,27 @@
+---
+description: Wellthlab DTC brand compliance — exact product imagery, colors, and voice
+globs: brand/**/*,content/**/*,posts/**/*,video/**/*,workflows/**/*,products/**/*
+alwaysApply: false
+---
+
+# Wellthlab DTC Brand Rules
+
+Read `brand/assets.md`, `brand/voice.md`, and `brand/canva.md` before any production.
+
+## Product imagery (non-negotiable)
+
+- Show a product → use the **exact official image** from wellthlab.shop (Shopify CDN URL in brief or catalog).
+- **Never** AI-generate, illustrate, hallucinate, or approximate product packaging, tins, strips, or labels.
+- **Never** use stock or generic supplement imagery as a stand-in.
+- If the product URL fails, fix it — do not proceed with a made-up product visual.
+
+## Brand colors
+
+Use only the hex tokens in `brand/canva.md` / `video/src/brand.ts`. Do not invent palettes.
+
+## Brand tone
+
+- Name: **Wellthlab** (not Wealth Lab)
+- Voice: direct, confident, science-aware, human — see `brand/voice.md`
+- FDA structure/function claims only; include disclaimer on supplement captions
+- No fabricated reviews or social proof

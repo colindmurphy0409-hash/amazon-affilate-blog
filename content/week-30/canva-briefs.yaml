@@ -1,0 +1,22 @@
+# Week 30 — Canva Autofill Payloads (agent-driven)
+
+briefs:
+  strips-vs-pills:
+    title: "Wellthlab — Strips vs Pills"
+    template_key: carousel_1080x1350
+    export_format: mp4
+    output: posts/media/day-05-strips-carousel.mp4
+    product_image_url: https://cdn.shopify.com/s/files/1/0778/5896/3634/files/hf_20260714_210605_fef13df1-fc64-4155-9e8b-3d6906eb012d.png?v=1784063602
+    slide_1:
+      headline: "No water. No pills."
+      sub: "5 reasons busy people choose oral strips"
+    slide_2:
+      text: "Dissolves on your tongue in seconds"
+    slide_3:
+      text: "Fits in a pocket tin — gym bag, desk, travel"
+    slide_4:
+      text: "Clean label. Third-party tested. Real doses."
+    slide_5:
+      text: "No proprietary blends — you know what you're taking"
+    slide_6:
+      cta: "Shop Wellthlab strips → wellthlab.shop"

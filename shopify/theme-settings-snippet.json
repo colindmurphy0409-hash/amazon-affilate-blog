@@ -1,0 +1,30 @@
+{
+  "_comment": "Paste values into Shopify Admin → Themes → Customize → Theme settings",
+  "colors": {
+    "background": "#FAFAF8",
+    "background_secondary": "#F1F5F9",
+    "text": "#0F172A",
+    "text_secondary": "#475569",
+    "button": "#0D9488",
+    "button_label": "#FFFFFF",
+    "button_hover": "#0F766E",
+    "secondary_button": "#FFFFFF",
+    "secondary_button_label": "#0F172A",
+    "secondary_button_border": "#E2E8F0",
+    "accent": "#14B8A6",
+    "sale": "#DC2626"
+  },
+  "typography": {
+    "heading_font": "Fraunces",
+    "heading_weight": "600",
+    "body_font": "Source Sans 3",
+    "body_weight": "400"
+  },
+  "google_fonts_url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap",
+  "remove_stylesheets": ["wl-polish.css"],
+  "seo_title_format": "{page_title} — Wellthlab",
+  "fix_titles": {
+    "replace": "Wealth Lab",
+    "with": "Wellthlab"
+  }
+}

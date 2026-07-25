@@ -1,0 +1,82 @@
+store: https://wellthlab.shop
+synced_at: '2026-07-25T19:30:07.824338+00:00'
+product_count: 10
+collections:
+- title: Beauty & Hair
+  handle: beauty-hair
+  count: 7
+- title: Best Sellers
+  handle: best-sellers
+  count: 8
+- title: Bundles
+  handle: bundles
+  count: 8
+- title: Featured Formulas
+  handle: featured-duo
+  count: 4
+- title: Gut & Digestion
+  handle: gut-digestion
+  count: 2
+- title: Home page
+  handle: frontpage
+  count: 1
+- title: Longevity & Optimization
+  handle: longevity-optimization
+  count: 1
+- title: Mind & Calm
+  handle: mind-calm
+  count: 3
+- title: Performance & Recovery
+  handle: performance-recovery
+  count: 2
+products:
+- handle: ashwagandha-plus
+  name: Savor
+  price: 29.5
+  sold_out: false
+  url: https://wellthlab.shop/products/ashwagandha-plus
+- handle: energy-strips
+  name: Savor
+  price: 75.0
+  sold_out: false
+  url: https://wellthlab.shop/products/energy-strips
+- handle: cognitive-relax-strips
+  name: Savor
+  price: 75.0
+  sold_out: false
+  url: https://wellthlab.shop/products/cognitive-relax-strips
+- handle: sleep-strips
+  name: Savor
+  price: 75.0
+  sold_out: false
+  url: https://wellthlab.shop/products/sleep-strips
+- handle: nad
+  name: Savor
+  price: 75.0
+  sold_out: false
+  url: https://wellthlab.shop/products/nad
+- handle: creatine-monohydrate
+  name: Savor
+  price: 75.0
+  sold_out: false
+  url: https://wellthlab.shop/products/creatine-monohydrate
+- handle: hair-skin-and-nails-strips
+  name: Savor
+  price: 75.0
+  sold_out: false
+  url: https://wellthlab.shop/products/hair-skin-and-nails-strips
+- handle: peptide-hair-growth-serum
+  name: Savor
+  price: 75.0
+  sold_out: false
+  url: https://wellthlab.shop/products/peptide-hair-growth-serum
+- handle: best-value-bundle
+  name: Savor
+  price: 79.9
+  sold_out: false
+  url: https://wellthlab.shop/products/best-value-bundle
+- handle: foundation-stack
+  name: Savor
+  price: 95.0
+  sold_out: true
+  url: https://wellthlab.shop/products/foundation-stack

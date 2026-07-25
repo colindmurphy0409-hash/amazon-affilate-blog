@@ -1,0 +1,29 @@
+# Canva Connect config — copy to canva.yaml and fill in (gitignored)
+# Setup: https://www.canva.dev/docs/connect/quickstart/
+
+client_id: ""
+client_secret: ""
+refresh_token: ""
+
+redirect_uri: "http://127.0.0.1:3001/oauth/redirect"
+
+# Brand template with autofill fields (Canva Enterprise or Connect autofill-enabled template)
+brand_templates:
+  carousel_1080x1350: ""   # brand template ID for 5-slide education carousel
+  reel_1080x1920: ""       # brand template ID for vertical Reel
+
+# Map Canva autofill field names → keys in content/week-XX/canva-briefs.yaml
+field_map:
+  slide_1_headline: slide_1.headline
+  slide_1_sub: slide_1.sub
+  slide_2_text: slide_2.text
+  slide_3_text: slide_3.text
+  slide_4_text: slide_4.text
+  slide_5_text: slide_5.text
+  slide_6_cta: slide_6.cta
+  product_image: product_image_url
+
+defaults:
+  export_format: mp4   # mp4 | png | pdf
+  poll_interval_seconds: 5
+  poll_timeout_seconds: 300
